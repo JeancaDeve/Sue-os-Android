@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Images-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/images_update_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_image_room" />
+
+    <LinearLayout
+        android:id="@+id/linear_txt_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/images_update_recyclerview"
+
+        >
+
+        <EditText
+            android:id="@+id/input_images_room"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@color/gray_10"
+            android:hint="@string/indicator_separator"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/gray_70" />
+
+        <Button
+            android:id="@+id/btn_verify_images_room"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/golden" />
+    </LinearLayout>
+
+    <!--Description-->
+
+    <EditText
+        android:id="@+id/input_description_room"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="20dp"
+        android:background="@color/gray_10"
+        android:ellipsize="end"
+        android:maxLines="6"
+        android:padding="10dp"
+        android:text="@string/large_text_example"
+        android:textColor="@color/gray_70"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/linear_txt_images" />
+
+    <!--Floor, price of day and number-->
+
+    <LinearLayout
+        android:id="@+id/floor_price_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_description_room">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/floor"
+                android:textColor="@color/gray_30"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/input_floor"
+                android:layout_width="48dp"
+                android:layout_height="40dp"
+                android:background="@color/gray_10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/priceday"
+                android:textColor="@color/gray_30"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/input_price_day"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:background="@color/gray_10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number"
+                android:textColor="@color/gray_30"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/input_number"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:background="@color/gray_10" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/floor_price_number">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/content"
+            android:textColor="@color/gray_30"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/gray_10"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <!--Buttons-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_content">
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/gray_70"
+            android:text="@string/x"
+            android:textColor="@color/gray_10" />
+
+        <!--separator-->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/gray_70"
+            android:text="@string/disable"
+            android:textColor="@color/gray_10" />
+
+        <!--separator-->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/gray_70"
+            android:text="@string/enable"
+            android:textColor="@color/gray_10" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

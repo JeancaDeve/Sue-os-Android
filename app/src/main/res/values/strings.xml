@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Dreams Reservation</string>
+    <string name="name_company">Sueños</string>
+    <string name="fr_title">Reservar Habitación</string>
+    <string name="desc_info_button">Información sobre las políticas de reservas</string>
+    <string name="im_guest">Yo soy el huésped</string>
+    <string name="guest">HUESPED</string>
+    <string name="dni">Dni</string>
+    <string name="dates">FECHAS</string>
+    <string name="phone">Celular</string>
+    <string name="entry_date">Fecha de Entrada</string>
+    <string name="departure_date">Fecha de Salida</string>
+    <string name="x">X</string>
+    <string name="reservar">RESERVAR</string>
+    <string name="indicator_separator">Separa las rutas con \'-\'</string>
+    <string name="large_text_example">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</string>
+    <string name="floor">FLOOR</string>
+    <string name="priceday">PRECIO/DIA</string>
+    <string name="number">NUMBERO</string>
+    <string name="content">CONTENIDO</string>
+    <string name="disable">Deshabilitar</string>
+    <string name="enable">Habilitar</string>
+</resources>
