@@ -8,8 +8,8 @@
     <string name="dni">Dni</string>
     <string name="dates">FECHAS</string>
     <string name="phone">Celular</string>
-    <string name="entry_date">Fecha de Entrada</string>
-    <string name="departure_date">Fecha de Salida</string>
+    <string name="entry_date">Entrada (2024/05/28)</string>
+    <string name="departure_date">Salida (2024/05/20)</string>
     <string name="x">X</string>
     <string name="reservar">RESERVAR</string>
     <string name="indicator_separator">Separa las rutas con \'-\'</string>
@@ -20,4 +20,12 @@
     <string name="content">CONTENIDO</string>
     <string name="disable">Deshabilitar</string>
     <string name="enable">Habilitar</string>
+    <string name="matrimoniales">MATRIMONIALES</string>
+    <string name="suites">SUITES</string>
+    <string name="individuales">INDIVIDUALES</string>
+    <string name="favorite">Tu hotel favorito</string>
+    <string name="register_load">Al iniciar, serás registrado en nuestra base de datos</string>
+    <string name="start">INICIAR</string>
+    <string name="piso_4">Piso 4</string>
+    <string name="price_example">S/. 320.00</string>
 </resources>

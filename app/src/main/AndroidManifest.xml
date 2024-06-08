@@ -13,7 +13,7 @@
         android:theme="@style/Theme.DreamsReservation"
         tools:targetApi="31">
         <activity
-            android:name=".activities.RoomUpdateActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.admin.usuarios.UsuariosActivity"/>
+        <activity android:name=".activities.admin.habitaciones.HabitacionesXActivity"/>
+        <activity android:name=".activities.admin.updateroom.RoomUpdateActivity"/>
+        <activity android:name=".activities.customer.habitaciones.HabitacionesActivity"/>
+        <activity android:name=".activities.admin.addroom.AddRoomActivity"/>
+        <activity android:name=".activities.admin.Reservas.ReservasActivity"/>
+        <activity android:name=".activities.customer.FormReservationActivity"/>
     </application>
 
 </manifest>

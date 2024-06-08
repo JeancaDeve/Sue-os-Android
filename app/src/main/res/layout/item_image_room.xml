@@ -3,12 +3,15 @@
     android:layout_width="320dp"
     android:layout_height="320dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="30dp">
+    app:cardCornerRadius="30dp"
+    android:layout_margin="10dp">
     <!--Image of room-->
     <ImageView
+        android:id="@+id/image_room_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/example_room"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        />
 
 </androidx.cardview.widget.CardView>

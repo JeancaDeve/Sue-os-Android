@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.activities
+package com.codycod.dreamsreservation.activities.customer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
