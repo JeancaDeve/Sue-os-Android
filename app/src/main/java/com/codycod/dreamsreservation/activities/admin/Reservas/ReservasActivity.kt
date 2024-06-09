@@ -13,7 +13,7 @@ import com.codycod.dreamsreservation.models.huesped.Huesped
 import com.codycod.dreamsreservation.models.reserva.Reservas
 import java.time.LocalDate
 
-class ReservasActivity:AppCompatActivity() {
+class ReservasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reservas)
@@ -25,7 +25,7 @@ class ReservasActivity:AppCompatActivity() {
         val roomExample = Habitaciones(
             R.string.large_text_example,
             100f,
-            R.drawable.habitacion1,
+            listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
             4,
             "Una cama",
             200,
@@ -33,14 +33,49 @@ class ReservasActivity:AppCompatActivity() {
         )
         val facturaExample = Factura("no tiene")
 
-        val guestExample = Huesped("Kevin","Fernandez","87654321","987654321","holamundo_43")
+        val guestExample = Huesped("Kevin", "Fernandez", "87654321", "987654321", "holamundo_43")
 
         val listReservas = listOf(
-            Reservas("2024-09-26", "2024-09-26", roomExample, "2024-09-27", facturaExample,guestExample),
-            Reservas("2023-02-14", "2023-02-14", roomExample, "2024-09-26", facturaExample, guestExample),
-            Reservas("2021-08-26", "2021-08-26", roomExample, "2024-09-26", facturaExample,guestExample),
-            Reservas("2022-11-17", "2022-11-17", roomExample, "2024-09-26", facturaExample,guestExample),
-            Reservas("2024-10-12", "2024-10-12", roomExample, "2024-09-26", facturaExample,guestExample)
+            Reservas(
+                "2024-09-26",
+                "2024-09-26",
+                roomExample,
+                "2024-09-27",
+                facturaExample,
+                guestExample
+            ),
+            Reservas(
+                "2023-02-14",
+                "2023-02-14",
+                roomExample,
+                "2024-09-26",
+                facturaExample,
+                guestExample
+            ),
+            Reservas(
+                "2021-08-26",
+                "2021-08-26",
+                roomExample,
+                "2024-09-26",
+                facturaExample,
+                guestExample
+            ),
+            Reservas(
+                "2022-11-17",
+                "2022-11-17",
+                roomExample,
+                "2024-09-26",
+                facturaExample,
+                guestExample
+            ),
+            Reservas(
+                "2024-10-12",
+                "2024-10-12",
+                roomExample,
+                "2024-09-26",
+                facturaExample,
+                guestExample
+            )
 
         )
         val adapter = ReservasAdapter(listReservas)

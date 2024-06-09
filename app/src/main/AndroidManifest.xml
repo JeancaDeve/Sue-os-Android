@@ -24,9 +24,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.customer.reservas.MisReservasActivity"/>
-        <activity android:name=".activities.customer.HabitacionesActivity"/>
-        <activity android:name=".activities.admin.habitaciones.HabitacionesXActivity"/>
+        <!--Customer-->
+        <activity android:name=".activities.customer.HabitacionesActivity" />
+        <activity android:name=".activities.customer.reservas.MisReservasActivity" />
+        <activity android:name=".activities.customer.InfoHabitacionActivity" />
+        <activity android:name=".activities.customer.FormReservationActivity"/>
+
+
+        <!--Admin-->
+
+        <activity android:name=".activities.admin.habitaciones.HabitacionesXActivity" />
 
 
     </application>

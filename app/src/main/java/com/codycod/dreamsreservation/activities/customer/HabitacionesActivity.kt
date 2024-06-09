@@ -33,8 +33,34 @@ class HabitacionesActivity : AppCompatActivity() {
 
             Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
+                4,
+                "Una cama",
+                200,
+                EstadoHabitacion.DISPONIBLE
+            ),
+            Habitaciones(
+                R.string.large_text_example,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
+                4,
+                "Una cama",
+                200,
+                EstadoHabitacion.DISPONIBLE
+            ),Habitaciones(
+                R.string.large_text_example,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
+                4,
+                "Una cama",
+                200,
+                EstadoHabitacion.DISPONIBLE
+            )
+            ,Habitaciones(
+                R.string.large_text_example,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
@@ -46,27 +72,26 @@ class HabitacionesActivity : AppCompatActivity() {
         val listHabitaciones2 = listOf<Habitaciones>(
             Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
-            ),
-            Habitaciones(
+            ),Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
-            ), Habitaciones(
+            ),Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
-                "una cama",
+                "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
             )
@@ -75,16 +100,32 @@ class HabitacionesActivity : AppCompatActivity() {
         val listHabitaciones3 = listOf<Habitaciones>(
             Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
-            ), Habitaciones(
+            ),Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
+                4,
+                "Una cama",
+                200,
+                EstadoHabitacion.DISPONIBLE
+            ),Habitaciones(
+                R.string.large_text_example,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
+                4,
+                "Una cama",
+                200,
+                EstadoHabitacion.DISPONIBLE
+            ),Habitaciones(
+                R.string.large_text_example,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
@@ -120,7 +161,7 @@ class HabitacionesActivity : AppCompatActivity() {
                 openGoogleMaps(37.7749, -122.4194)
             }
             builder.setNegativeButton("Info de Habitacion") { dialog, which ->
-                // Do something when the negative button is clicked
+               startActivity(Intent(this, InfoHabitacionActivity::class.java))
             }
             builder.setNeutralButton("Mis Reservas") { dialog, which ->
                 startActivity(Intent(this, MisReservasActivity::class.java))
@@ -143,7 +184,7 @@ class HabitacionesActivity : AppCompatActivity() {
             return true
         } else {
             // Maneja el caso en que no hay una aplicación para manejar el intent
-            Toast.makeText(this, "Mis Reservas", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "En proceso", Toast.LENGTH_SHORT).show()
             return false
         }
     }

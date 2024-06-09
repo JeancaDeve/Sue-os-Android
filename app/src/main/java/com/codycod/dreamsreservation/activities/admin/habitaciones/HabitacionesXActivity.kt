@@ -20,8 +20,8 @@ class HabitacionesXActivity : AppCompatActivity() {
         val listHabitaciones = listOf<Habitaciones>(
             Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
@@ -29,25 +29,24 @@ class HabitacionesXActivity : AppCompatActivity() {
             ),
             Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
             ),Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,
                 EstadoHabitacion.DISPONIBLE
-            ),
-            Habitaciones(
+            ),Habitaciones(
                 R.string.large_text_example,
-                332.43f,
-                R.drawable.habitacion1,
+                100f,
+                listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
                 4,
                 "Una cama",
                 200,

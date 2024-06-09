@@ -22,7 +22,7 @@ class HabitacionesXViewHolder (inflater: LayoutInflater, viewGroup:ViewGroup):
         textPrecio = itemView.findViewById(R.id.textPrecio)
     }
     fun bind (habitaciones: Habitaciones){
-        imgHabitaciones?.setImageResource(habitaciones.imgHabitacion)
+        imgHabitaciones?.setImageResource(habitaciones.imgHabitacion[0])
         textDescripcion?.setText(habitaciones.descripcion)
         textPiso?.text = "Piso ${habitaciones.piso}"
         textPrecio?.text = "S/${habitaciones.precio}"

@@ -23,7 +23,7 @@ class MisReservasActivity : AppCompatActivity() {
         val roomExample = Habitaciones(
             R.string.large_text_example,
             100f,
-            R.drawable.habitacion1,
+            listOf(R.drawable.habitacion1, R.drawable.habitacion2, R.drawable.habitacion3),
             4,
             "Una cama",
             200,

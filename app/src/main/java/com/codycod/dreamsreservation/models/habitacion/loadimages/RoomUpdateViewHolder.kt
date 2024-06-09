@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.activities.admin.updateroom
+package com.codycod.dreamsreservation.models.habitacion.loadimages
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

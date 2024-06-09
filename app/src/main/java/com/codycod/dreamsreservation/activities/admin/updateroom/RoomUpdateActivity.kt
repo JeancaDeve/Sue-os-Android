@@ -1,11 +1,11 @@
 package com.codycod.dreamsreservation.activities.admin.updateroom
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
+import com.codycod.dreamsreservation.models.habitacion.loadimages.RoomUpdateAdapter
 
 class RoomUpdateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

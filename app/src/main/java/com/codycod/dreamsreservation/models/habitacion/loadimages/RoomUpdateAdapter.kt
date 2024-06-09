@@ -1,10 +1,8 @@
-package com.codycod.dreamsreservation.activities.admin.updateroom
+package com.codycod.dreamsreservation.models.habitacion.loadimages
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.codycod.dreamsreservation.R
 
 class RoomUpdateAdapter(private val listImages: List<Int>) :
     RecyclerView.Adapter<RoomUpdateViewHolder>() {
