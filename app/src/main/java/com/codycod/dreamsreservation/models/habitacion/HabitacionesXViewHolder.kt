@@ -23,9 +23,9 @@ class HabitacionesXViewHolder (inflater: LayoutInflater, viewGroup:ViewGroup):
     }
     fun bind (habitaciones: Habitaciones){
         imgHabitaciones?.setImageResource(habitaciones.imgHabitacion)
-        textDescripcion?.text =habitaciones.descripcion
-        textPiso?.text =habitaciones.piso
-        textPrecio?.text =habitaciones.precio
+        textDescripcion?.setText(habitaciones.descripcion)
+        textPiso?.text = "Piso ${habitaciones.piso}"
+        textPrecio?.text = "S/${habitaciones.precio}"
 
 
     }

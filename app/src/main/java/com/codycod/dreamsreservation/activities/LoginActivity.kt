@@ -9,9 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.activities.admin.habitaciones.HabitacionesXActivity
-import com.codycod.dreamsreservation.activities.admin.updateroom.RoomUpdateActivity
-import com.codycod.dreamsreservation.activities.customer.FormReservationActivity
-import com.codycod.dreamsreservation.activities.customer.habitaciones.HabitacionesActivity
+import com.codycod.dreamsreservation.activities.customer.HabitacionesActivity
 
 
 class LoginActivity : AppCompatActivity() {

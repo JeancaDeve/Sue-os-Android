@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.activities.admin.Reservas.Reservas
+import com.codycod.dreamsreservation.functions.Functions
+import com.codycod.dreamsreservation.models.reserva.Reservas
 import java.time.format.DateTimeFormatter
 
 class ReservasViewHolder (inflater: LayoutInflater,ViewGroup:ViewGroup):
@@ -24,12 +25,13 @@ RecyclerView.ViewHolder(inflater.inflate(R.layout.item_reservas,ViewGroup,false)
             txtMontoTotal=itemView.findViewById(R.id.txtMontoTotal)
         }
     fun bind (reservas: Reservas){
-        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
-        txtfecha?.text = reservas.fecha.format(dateFormatter)
-        textHuesped?.text = reservas.huesped
-        txtDiasHospedado?.text = reservas.diasHospedado.toString()
-        txtNHabitacion?.text = reservas.nhabitacion.toString()
-        txtMontoTotal?.text = reservas.montototal.toString()
+        val daysHosted = Functions().getDayHosted(reservas.fechaEntrada,reservas.fechaSalida)
+
+        txtfecha?.text = reservas.fechaReserva
+        textHuesped?.text = "${reservas.huesped.name} ${reservas.huesped.lastname}"
+        txtDiasHospedado?.text = daysHosted.toString()
+        txtNHabitacion?.text = reservas.habitacion.numero.toString()
+        txtMontoTotal?.text = "S/${(reservas.habitacion.precio * daysHosted)}"
     }
 }
