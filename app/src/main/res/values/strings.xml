@@ -28,4 +28,18 @@
     <string name="start">INICIAR</string>
     <string name="piso_4">Piso 4</string>
     <string name="price_example">S/. 320.00</string>
+    <string name="example_price">300.50</string>
+    <string name="see_info">Ver mas Información</string>
+    <string name="description_login">"Sigue Soñando"</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

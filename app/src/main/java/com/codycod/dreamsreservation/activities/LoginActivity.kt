@@ -5,27 +5,30 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import android.window.SplashScreen
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.activities.admin.habitaciones.HabitacionesXActivity
-import com.codycod.dreamsreservation.activities.customer.HabitacionesActivity
+import com.codycod.dreamsreservation.enums.EnUserRoles
+import com.codycod.dreamsreservation.functions.exampleslist.ListExample
+import com.codycod.dreamsreservation.models.user.MdUser
 
 
 class LoginActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val splashScreen  = installSplashScreen()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         super.onCreate(savedInstanceState)
 
-        AlertDialog.Builder(this)
-            .setCancelable(false)
-            .setMessage("Al iniciar sesión, estaremos registrando tu información en nuestra base de datos.")
-            .setNegativeButton("Aceptar") { dialog, which ->
-                dialog.dismiss()
-            }
-            .show()
-
         setContentView(R.layout.activity_login)
+
+        splashScreen.setKeepOnScreenCondition{false}
 
         // Asegúrate de que estos IDs coincidan con los del archivo XML
         val edtcelular = findViewById<EditText>(R.id.edtcelular)
@@ -60,20 +63,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "DNI incorrecto", Toast.LENGTH_SHORT).show()
                 }
 
-                celular == "987654321" && dni == "87654321" -> {
-                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, HabitacionesActivity::class.java)
-                    startActivity(intent)
-                }
 
-                celular == "987654322" && dni == "87654322" -> {
-                    startActivity(Intent(this, HabitacionesXActivity::class.java))
-                }
-
-                else -> {
-                    Toast.makeText(this, "Número de celular o DNI incorrectos", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                else -> authorization(celular,dni)
             }
         }
     }
@@ -87,4 +78,26 @@ class LoginActivity : AppCompatActivity() {
     private fun isValidDni(dni: String): Boolean {
         return dni.length >= 8 && dni.all { it.isDigit() } // DNI en Perú tiene 8 dígitos
     }
+
+    private fun authorization(phone: String, dni: String) {
+
+        val user: MdUser? = findUser(phone, dni)
+
+        if (user != null) {
+            when (user.role) {
+                EnUserRoles.COMMON_USER ->
+                    startActivity(Intent(this, MenuCustomerActivity::class.java))
+
+                EnUserRoles.ADMIN -> Toast.makeText(this, "Corregir Mensaje", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }else Toast.makeText(this, "El usuario no existe", Toast.LENGTH_SHORT)
+            .show()
+
+    }
+
+    private fun findUser(phone: String, dni: String): MdUser? {
+        return ListExample.userList.find { user -> user.phone == phone && user.dni == dni }
+    }
+
 }

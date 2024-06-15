@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        tools:listitem="@layout/item_mis_reservas_user">
+        tools:listitem="@layout/item_my_resrevation">
 
     </androidx.recyclerview.widget.RecyclerView>
 

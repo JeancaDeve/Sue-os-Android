@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_launcher_max"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_launcher_max"
         android:supportsRtl="true"
         android:theme="@style/Theme.DreamsReservation"
         tools:targetApi="31">
-
         <activity
-            android:name=".activities.LoginActivity"
+           android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Starting"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +25,12 @@
             </intent-filter>
         </activity>
 
-        <!--Customer-->
-        <activity android:name=".activities.customer.HabitacionesActivity" />
-        <activity android:name=".activities.customer.reservas.MisReservasActivity" />
-        <activity android:name=".activities.customer.InfoHabitacionActivity" />
-        <activity android:name=".activities.customer.FormReservationActivity"/>
-
-
-        <!--Admin-->
-
-        <activity android:name=".activities.admin.habitaciones.HabitacionesXActivity" />
-
-
+        <!-- Customer -->
+        <activity android:name=".activities.MenuCustomerActivity" />
+        <activity android:name=".activities.reservas.MisReservasActivity" />
+        <activity android:name=".activities.InformationRoomActivity" />
+        <activity android:name=".activities.roomsfilter.RoomsFilterActivity"/>
+        <activity android:name=".activities.FormReservationActivity" /> <!-- Admin -->
     </application>
 
 </manifest>

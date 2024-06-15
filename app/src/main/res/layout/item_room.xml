@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dp"
+    android:layout_height="300dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="20dp"
+    android:backgroundTint="@color/white"
+    android:elevation="60dp"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--Room image and price-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp">
+
+            <ImageView
+                android:id="@+id/img_room_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/example_room" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_price_room_card"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/money" />
+
+                <TextView
+                    android:id="@+id/txt_price_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/example_price"
+                    android:textColor="@color/gray_100"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Description of room-->
+
+        <LinearLayout
+            android:id="@+id/container_info_room"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@color/gray_100"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/txt_description_list"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@string/large_text_example"
+                android:textColor="@color/gray_10" />
+
+            <!--Button to see more information-->
+
+            <Button
+                android:id="@+id/btn_see_more"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/golden"
+                android:text="@string/see_info"
+                android:textColor="@color/gray_100"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
