@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.activities.reservas.MisReservasActivity
+import com.codycod.dreamsreservation.activities.MyReservationsActivity
 
 
 class ProfileUserFragment : Fragment() {
@@ -29,7 +29,7 @@ class ProfileUserFragment : Fragment() {
         val btnReservations = view.findViewById<LinearLayout>(R.id.btn_reservas_profile)
 
         btnReservations.setOnClickListener {
-            startActivity(Intent(view.context, MisReservasActivity::class.java))
+            startActivity(Intent(view.context, MyReservationsActivity::class.java))
         }
 
         //get btn to open google maps
@@ -45,9 +45,7 @@ class ProfileUserFragment : Fragment() {
                 "com.google.android.maps.MapsActivity"
             )
             startActivity(intent)
-            }
-
-
+        }
 
 
     }
@@ -68,7 +66,7 @@ class ProfileUserFragment : Fragment() {
     }
 
 
-    companion object{
+    companion object {
         fun newInstance(): ProfileUserFragment = ProfileUserFragment()
     }
 

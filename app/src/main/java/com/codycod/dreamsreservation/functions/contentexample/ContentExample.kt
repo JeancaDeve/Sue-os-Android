@@ -1,19 +1,19 @@
-package com.codycod.dreamsreservation.functions.exampleslist
+package com.codycod.dreamsreservation.functions.contentexample
 
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.enums.EnRoomStatus
 import com.codycod.dreamsreservation.enums.EnTypeRoom
 import com.codycod.dreamsreservation.enums.EnUserRoles
-import com.codycod.dreamsreservation.models.bill.MdBill
-import com.codycod.dreamsreservation.models.guest.MdGuest
-import com.codycod.dreamsreservation.models.reservation.MdReservation
-import com.codycod.dreamsreservation.models.room.MdRoom
-import com.codycod.dreamsreservation.models.user.MdUser
+import com.codycod.dreamsreservation.models.MdBill
+import com.codycod.dreamsreservation.models.MdGuest
+import com.codycod.dreamsreservation.models.MdReservation
+import com.codycod.dreamsreservation.models.MdRoom
+import com.codycod.dreamsreservation.models.MdUser
 
-class ListExample {
+class ContentExample {
 
     companion object {
-        val roomExample01 = MdRoom(
+        private val roomExample01 = MdRoom(
             R.string.large_text_example,
             100f,
             "https://img.freepik.com/fotos-premium/habitaciones-4_1045419-15.jpg - https://eu-central-1.linodeobjects.com/tecnohotelnews/2022/12/image004-2-1.jpg",
@@ -24,7 +24,7 @@ class ListExample {
             EnTypeRoom.MATRIMONIAL
         )
 
-        val roomExample02 = MdRoom(
+        private val roomExample02 = MdRoom(
             R.string.large_text_example,
             400f,
             "https://www.hola.com/imagenes/decoracion/20230425230358/dormitorios-inspirados-en-habitaciones-hoteles-am/1-237-29/habitaciones-hotel-6a-a.jpg - https://cdn.shopify.com/s/files/1/0417/8349/2759/files/Habitacion-Modenrna-y-minimalista_large.jpg?v=1595955799",
@@ -36,19 +36,19 @@ class ListExample {
         )
 
 
-        val mdBillExample = MdBill("2003-04-05", "12345678998", 2300.00f)
+        private val mdBillExample = MdBill("2003-04-05", "12345678998", 2300.00f)
 
-        val userCommonExample =
+        private val userCommonExample =
             MdUser("Kevin", "Fernandez", "87654321", "987654321", EnUserRoles.COMMON_USER)
 
-        val userAdminExample =
+        private val userAdminExample =
             MdUser("Faraon", "Love Shady", "87654322", "987654322", EnUserRoles.ADMIN)
 
 
-        val guestExample = MdGuest("Kevin", "Fernandez", "87654321", "987654321")
+        private val guestExample = MdGuest("Kevin", "Fernandez", "87654321", "987654321")
 
 
-        val listReservas = listOf(
+        val reservationsList = listOf(
             MdReservation(
                 "2024-09-26", "2024-09-26", roomExample01, "2024-09-27", mdBillExample, guestExample
             ), MdReservation(

@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.activities.roomsfilter
+package com.codycod.dreamsreservation.activities.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.functions.Functions
-import com.codycod.dreamsreservation.models.room.MdRoom
+import com.codycod.dreamsreservation.models.MdRoom
 
 class RoomsFilterViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_room_filter, viewGroup, false)) {

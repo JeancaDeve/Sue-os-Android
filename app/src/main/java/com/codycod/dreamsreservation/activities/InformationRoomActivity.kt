@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.functions.Functions
-import com.codycod.dreamsreservation.models.room.MdRoom
-import com.codycod.dreamsreservation.models.room.loadContentRoom.ContentRoomAdapter
-import com.codycod.dreamsreservation.models.room.loadimages.RoomUpdateAdapter
+import com.codycod.dreamsreservation.models.MdRoom
+import com.codycod.dreamsreservation.activities.adapters.ContentRoomAdapter
+import com.codycod.dreamsreservation.activities.adapters.ImagesRoomAdapter
 
 
 class InformationRoomActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class InformationRoomActivity : AppCompatActivity() {
 
         //verify if exist object_room
 
-        if(intent.hasExtra("object_room")){
+        if (intent.hasExtra("object_room")) {
             val objectRoom = intent.getSerializableExtra("object_room") as MdRoom
 
             //get items to insert information
@@ -30,7 +30,7 @@ class InformationRoomActivity : AppCompatActivity() {
             val rvContain = findViewById<RecyclerView>(R.id.rv_contain_room)
             val txtPrice = findViewById<TextView>(R.id.txt_price_info)
             val txtDescription = findViewById<TextView>(R.id.txt_description_info)
-            val  txtNFloor = findViewById<TextView>(R.id.txt_n_floor_info)
+            val txtNFloor = findViewById<TextView>(R.id.txt_n_floor_info)
             val txtNRoom = findViewById<TextView>(R.id.txt_n_room_info)
 
 
@@ -41,7 +41,7 @@ class InformationRoomActivity : AppCompatActivity() {
 
             //load info in recycler view
 
-            rvImagesRoom.adapter = RoomUpdateAdapter(Functions.divideText(objectRoom.image))
+            rvImagesRoom.adapter = ImagesRoomAdapter(Functions.divideText(objectRoom.image))
             rvImagesRoom.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -49,9 +49,8 @@ class InformationRoomActivity : AppCompatActivity() {
             rvContain.adapter = ContentRoomAdapter(Functions.divideText(objectRoom.content))
 
 
-            rvContain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-
+            rvContain.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
         }
@@ -69,10 +68,6 @@ class InformationRoomActivity : AppCompatActivity() {
         btnIrReservar.setOnClickListener {
             startActivity(Intent(this, FormReservationActivity::class.java))
         }
-
-
-
-
 
 
     }

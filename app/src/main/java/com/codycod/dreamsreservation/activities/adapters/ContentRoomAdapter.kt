@@ -1,13 +1,14 @@
-package com.codycod.dreamsreservation.models.room.loadContentRoom
+package com.codycod.dreamsreservation.activities.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.codycod.dreamsreservation.activities.viewholders.ContentRoomViewHolder
 
-class ContentRoomAdapter(private val containList : List<String>) :
-RecyclerView.Adapter<ContentRoomViewHolder>() {
+class ContentRoomAdapter(private val containList: List<String>) :
+    RecyclerView.Adapter<ContentRoomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRoomViewHolder {
-      return  ContentRoomViewHolder(LayoutInflater.from(parent.context), parent)
+        return ContentRoomViewHolder(LayoutInflater.from(parent.context), parent)
     }
 
     override fun onBindViewHolder(holder: ContentRoomViewHolder, position: Int) {
@@ -15,6 +16,6 @@ RecyclerView.Adapter<ContentRoomViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-       return containList.size
+        return containList.size
     }
 }

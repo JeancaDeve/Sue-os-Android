@@ -8,17 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.activities.roomsfilter.RoomsFilterActivity
+import com.codycod.dreamsreservation.activities.RoomsFilterActivity
 import com.codycod.dreamsreservation.enums.EnTypeRoom
 import com.codycod.dreamsreservation.functions.Functions
-import com.codycod.dreamsreservation.models.ButtonTypeRoom
-import com.codycod.dreamsreservation.models.room.RoomsListAdapter
+import com.codycod.dreamsreservation.models.MdButtonTypeRoom
+import com.codycod.dreamsreservation.activities.adapters.RoomsListAdapter
 
 class RoomsFragment : Fragment() {
     override fun onCreateView(
@@ -50,10 +48,10 @@ class RoomsFragment : Fragment() {
         val containerButtons = view.findViewById<LinearLayout>(R.id.container_buttons_type_room)
 
         val listButtons = listOf(
-            ButtonTypeRoom("TODO", null, true),
-            ButtonTypeRoom("SUITES", EnTypeRoom.SUITES, false),
-            ButtonTypeRoom("MATRIMONIAL", EnTypeRoom.MATRIMONIAL, false),
-            ButtonTypeRoom("INDIVIDUAL", EnTypeRoom.INDIVIDUAL, false)
+            MdButtonTypeRoom("TODO", null, true),
+            MdButtonTypeRoom("SUITES", EnTypeRoom.SUITES, false),
+            MdButtonTypeRoom("MATRIMONIAL", EnTypeRoom.MATRIMONIAL, false),
+            MdButtonTypeRoom("INDIVIDUAL", EnTypeRoom.INDIVIDUAL, false)
         )
 
         listButtons.forEach { buttonInfo ->
@@ -65,7 +63,7 @@ class RoomsFragment : Fragment() {
                             buttonInfo.typeRoom -> {
                                 rvMatrimonial.adapter =
                                     RoomsListAdapter(Functions.listRoomsByType(buttonInfo.typeRoom))
-                            buttonInfo.isActive = !buttonInfo.isActive
+                                buttonInfo.isActive = !buttonInfo.isActive
                             }
 
                             else -> {}
@@ -89,8 +87,6 @@ class RoomsFragment : Fragment() {
     companion object {
         fun newInstance(): RoomsFragment = RoomsFragment()
     }
-
-    //add event onclick listener
 
 
 }

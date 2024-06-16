@@ -1,8 +1,8 @@
 package com.codycod.dreamsreservation.functions
 
 import com.codycod.dreamsreservation.enums.EnTypeRoom
-import com.codycod.dreamsreservation.functions.exampleslist.ListExample
-import com.codycod.dreamsreservation.models.room.MdRoom
+import com.codycod.dreamsreservation.functions.contentexample.ContentExample
+import com.codycod.dreamsreservation.models.MdRoom
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -24,8 +24,8 @@ class Functions {
         //to rooms list by content
         fun listRoomsByContent(filterContent: String? = null): List<MdRoom> {
             return if (filterContent.isNullOrEmpty())
-                ListExample.roomsList
-            else ListExample.roomsList.filter { room ->
+                ContentExample.roomsList
+            else ContentExample.roomsList.filter { room ->
                 room.content.contains(
                     filterContent,
                     ignoreCase = true
@@ -36,12 +36,11 @@ class Functions {
         //to list by type room
 
         fun listRoomsByType(type: EnTypeRoom? = null): List<MdRoom> {
-            return if (type == null) ListExample.roomsList
-            else ListExample.roomsList.filter { room ->
+            return if (type == null) ContentExample.roomsList
+            else ContentExample.roomsList.filter { room ->
                 room.typeRoom == type
             }
         }
-
 
 
     }

@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.activities.roomsfilter
+package com.codycod.dreamsreservation.activities
 
 import android.content.Context
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
+import com.codycod.dreamsreservation.activities.adapters.RoomsFilterAdapter
 import com.codycod.dreamsreservation.functions.Functions
-import com.codycod.dreamsreservation.models.room.MdRoom
+import com.codycod.dreamsreservation.models.MdRoom
 
 class RoomsFilterActivity : AppCompatActivity() {
 

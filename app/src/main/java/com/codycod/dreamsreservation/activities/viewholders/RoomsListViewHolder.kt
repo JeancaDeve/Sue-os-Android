@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.models.room
+package com.codycod.dreamsreservation.activities.viewholders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.functions.Functions
+import com.codycod.dreamsreservation.models.MdRoom
 
 class RoomsListViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_room, viewGroup, false)) {

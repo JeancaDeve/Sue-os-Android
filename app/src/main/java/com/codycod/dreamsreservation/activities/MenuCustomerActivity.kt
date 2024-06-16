@@ -20,6 +20,7 @@ class MenuCustomerActivity : AppCompatActivity() {
                     updateFragment(RoomsFragment.newInstance())
                     true
                 }
+
                 R.id.ibn_profile_user -> {
                     updateFragment(ProfileUserFragment.newInstance())
                     true

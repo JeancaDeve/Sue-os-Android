@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import android.window.SplashScreen
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.enums.EnUserRoles
-import com.codycod.dreamsreservation.functions.exampleslist.ListExample
-import com.codycod.dreamsreservation.models.user.MdUser
+import com.codycod.dreamsreservation.functions.contentexample.ContentExample
+import com.codycod.dreamsreservation.models.MdUser
 
 
 class LoginActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val splashScreen  = installSplashScreen()
+        val splashScreen = installSplashScreen()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
@@ -28,24 +27,23 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        splashScreen.setKeepOnScreenCondition{false}
+        splashScreen.setKeepOnScreenCondition { false }
 
-        // Asegúrate de que estos IDs coincidan con los del archivo XML
-        val edtcelular = findViewById<EditText>(R.id.edtcelular)
+        val edtPhone = findViewById<EditText>(R.id.edtcelular)
         val edtDni = findViewById<EditText>(R.id.edtDni)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
 
         btnLogin.setOnClickListener {
-            val celular = edtcelular.text.toString()
+            val phone = edtPhone.text.toString()
             val dni = edtDni.text.toString()
 
 
 
             when {
-                celular.isEmpty() -> {
+                phone.isEmpty() -> {
                     Toast.makeText(
                         this,
-                        "Por favor, ingrese su número de celular",
+                        "Porfavor, ingrese su número de celular",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -54,8 +52,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Por favor, ingrese su DNI", Toast.LENGTH_SHORT).show()
                 }
 
-                !isValidCelular(celular) -> {
-                    Toast.makeText(this, "Número de celular o DNI incorrectos", Toast.LENGTH_SHORT)
+                !isValidCelular(phone) -> {
+                    Toast.makeText(this, "Número celular incorrecto", Toast.LENGTH_SHORT)
                         .show()
                 }
 
@@ -64,21 +62,22 @@ class LoginActivity : AppCompatActivity() {
                 }
 
 
-                else -> authorization(celular,dni)
+                else -> authorization(phone, dni)
             }
         }
     }
 
-    // Función para validar el número de celular
+    //to verify phone number is valid for peru
     private fun isValidCelular(celular: String): Boolean {
         return celular.length >= 9 && celular.all { it.isDigit() }
     }
 
-    // Función para validar el DNI
+    // to verify dni is valid for peru
     private fun isValidDni(dni: String): Boolean {
         return dni.length >= 8 && dni.all { it.isDigit() } // DNI en Perú tiene 8 dígitos
     }
 
+    // to verify if the user exists in the list of users and verify the role
     private fun authorization(phone: String, dni: String) {
 
         val user: MdUser? = findUser(phone, dni)
@@ -88,16 +87,21 @@ class LoginActivity : AppCompatActivity() {
                 EnUserRoles.COMMON_USER ->
                     startActivity(Intent(this, MenuCustomerActivity::class.java))
 
-                EnUserRoles.ADMIN -> Toast.makeText(this, "Corregir Mensaje", Toast.LENGTH_SHORT)
+                EnUserRoles.ADMIN -> Toast.makeText(
+                    this,
+                    "Esta cuenta es administradora",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
-        }else Toast.makeText(this, "El usuario no existe", Toast.LENGTH_SHORT)
+        } else Toast.makeText(this, "El usuario no existe", Toast.LENGTH_SHORT)
             .show()
 
     }
 
+    //to find user by phone number and dni
     private fun findUser(phone: String, dni: String): MdUser? {
-        return ListExample.userList.find { user -> user.phone == phone && user.dni == dni }
+        return ContentExample.userList.find { user -> user.phone == phone && user.dni == dni }
     }
 
 }

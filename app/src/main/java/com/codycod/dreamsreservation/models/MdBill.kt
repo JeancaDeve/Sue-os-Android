@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.models.bill
+package com.codycod.dreamsreservation.models
 
 class MdBill(
     val date : String,
