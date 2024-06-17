@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.bumptech.glide/glide
     implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
+    kapt("com.github.bumptech.glide:compiler:4.12.0")
     // https://mvnrepository.com/artifact/androidx.core/core-splashscreen
     implementation("androidx.core:core-splashscreen:1.0.0-rc01")
 
