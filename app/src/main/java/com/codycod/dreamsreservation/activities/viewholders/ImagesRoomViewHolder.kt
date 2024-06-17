@@ -15,6 +15,8 @@ class ImagesRoomViewHolder(inflate: LayoutInflater, viewGroup: ViewGroup) :
     fun bind(image: String) {
         Glide.with(itemView.context)
             .load(image)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.error_image)
             .into(routeImage)
     }
 

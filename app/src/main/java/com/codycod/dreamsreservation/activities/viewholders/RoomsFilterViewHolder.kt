@@ -24,8 +24,8 @@ class RoomsFilterViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
 
         Glide.with(itemView.context)
             .load(listImages[0])
-            .placeholder(R.drawable.icon_launcher_max)
-            .error(R.drawable.logo_dreams_200)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.error_image)
             .into(image)
 
         price.text = "S/. ${room.price}"

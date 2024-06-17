@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.functions.Functions
@@ -23,14 +24,18 @@ class RoomsListViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
     fun bind(mdRoom: MdRoom) {
         val listImages = Functions.divideText(mdRoom.image)
 
-        val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
+        val options = RequestOptions()
+            .override(500, 500)
+            .placeholder(R.drawable.placeholder_image)
+            .error(R.drawable.error_image)
+            .centerCrop()
+
 
         Glide.with(itemView.context)
             .load(listImages[0])
-            .apply(requestOptions)
-            .placeholder(R.drawable.logo_dreams)
-            .error(R.drawable.icon_launcher_max)
+            .apply(options)
             .into(imgRoom)
+
 
         txtDescription.setText(mdRoom.description)
         txtPrice.text = "S/.${mdRoom.price}"
