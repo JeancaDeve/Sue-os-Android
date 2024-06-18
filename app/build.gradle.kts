@@ -56,6 +56,16 @@ dependencies {
     // https://mvnrepository.com/artifact/androidx.core/core-splashscreen
     implementation("androidx.core:core-splashscreen:1.0.0-rc01")
 
+    // https://mvnrepository.com/artifact/androidx.room/room-runtime
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    kapt("androidx.room:room-ktx:2.6.1")
+
+
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
