@@ -15,7 +15,7 @@
         android:theme="@style/Theme.DreamsReservation"
         tools:targetApi="31">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Starting"
             android:windowSoftInputMode="adjustResize|stateHidden">
@@ -27,11 +27,11 @@
         </activity>
 
         <!-- Customer -->
-        <activity android:name=".activities.MenuCustomerActivity" />
-        <activity android:name=".activities.MyReservationsActivity" />
-        <activity android:name=".activities.InformationRoomActivity" />
-        <activity android:name=".activities.RoomsFilterActivity" />
-        <activity android:name=".activities.FormReservationActivity" />
+        <activity android:name=".ui.activities.MenuCustomerActivity" />
+        <activity android:name=".ui.activities.MyReservationsActivity" />
+        <activity android:name=".ui.activities.InformationRoomActivity" />
+        <activity android:name=".ui.activities.RoomsFilterActivity" />
+        <activity android:name=".ui.activities.FormReservationActivity" />
     </application>
 
 </manifest>
