@@ -8,5 +8,5 @@ data class MdReservation(
     val mdBill: MdBill,
     val guest: MdGuest //delete later
 ) {
-    val code: Long = 1
+    val code: Long = 0
 }

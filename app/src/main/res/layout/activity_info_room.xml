@@ -111,31 +111,47 @@
         tools:itemCount="1"
         tools:listitem="@layout/item_contain_room" />
 
-
     <LinearLayout
+        android:id="@+id/ll_reviews_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_contain_room">
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="56dp"
-            android:layout_height="54dp"
+        <TextView
+            android:id="@+id/textReseñas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:backgroundTint="@color/gray_30"
-            android:text="@string/x"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:text="RESEÑAS"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnIrReservar"
-            android:layout_width="188dp"
-            android:layout_height="54dp"
-            android:layout_margin="15dp"
-            android:backgroundTint="@color/gray_100"
-            android:text="IR A RESERVAR"
-            android:textColor="@color/white" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/new_review" />
+
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_reviews_button"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_review" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/f_btn_more_options_room"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:src="@drawable/more_options"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

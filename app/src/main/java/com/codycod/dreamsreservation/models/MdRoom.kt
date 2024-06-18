@@ -12,9 +12,10 @@ data class MdRoom(
     val content: String,
     val number: Short,
     val status: EnRoomStatus,
-    val typeRoom: EnTypeRoom
+    val typeRoom: EnTypeRoom,
+    var reviews: ArrayList<MdReview>
 ) : Serializable {
-    val code: Long = 1
+    val code: Long = 0
 }
 
 

@@ -1,6 +1,7 @@
 package com.codycod.dreamsreservation.models
 
 import com.codycod.dreamsreservation.enums.EnUserRoles
+import java.io.Serializable
 
 data class MdUser(
     val name: String,
@@ -8,6 +9,6 @@ data class MdUser(
     val dni: String,
     val phone: String,
     val role: EnUserRoles
-) {
-    val code: Long = 1
+) : Serializable{
+    val code: Long = 0
 }

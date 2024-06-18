@@ -7,12 +7,18 @@ import com.codycod.dreamsreservation.enums.EnUserRoles
 import com.codycod.dreamsreservation.models.MdBill
 import com.codycod.dreamsreservation.models.MdGuest
 import com.codycod.dreamsreservation.models.MdReservation
+import com.codycod.dreamsreservation.models.MdReview
 import com.codycod.dreamsreservation.models.MdRoom
 import com.codycod.dreamsreservation.models.MdUser
 
 class ContentExample {
 
     companion object {
+
+
+        private val userCommonExample =
+            MdUser("Kevin", "Fernandez", "87654321", "987654321", EnUserRoles.COMMON_USER)
+
         private val roomExample01 = MdRoom(
             R.string.large_text_example,
             100f,
@@ -21,7 +27,8 @@ class ContentExample {
             "Una cama - Una TV 35'",
             200,
             EnRoomStatus.AVAILABLE,
-            EnTypeRoom.MATRIMONIAL
+            EnTypeRoom.MATRIMONIAL,
+            arrayListOf<MdReview>()
         )
 
         private val roomExample02 = MdRoom(
@@ -32,14 +39,20 @@ class ContentExample {
             "Una cama - Una TV 35' - Un sillon Tantrico - Un tubo",
             500,
             EnRoomStatus.AVAILABLE,
-            EnTypeRoom.SUITES
+            EnTypeRoom.SUITES,
+            arrayListOf<MdReview>(
+                MdReview(
+                    userCommonExample,
+                    "Muy buena habitacion, es bastante buena :0, amo su manera de decoracion, etc, me gusta mucho",
+                    "2024-05-07 06:54:51"
+                ),
+                MdReview(userCommonExample, "Me gusto esta habitacion 😍", "2024-05-09 06:54:56"),
+            )
         )
 
 
         private val mdBillExample = MdBill("2003-04-05", "12345678998", 2300.00f)
 
-        private val userCommonExample =
-            MdUser("Kevin", "Fernandez", "87654321", "987654321", EnUserRoles.COMMON_USER)
 
         private val userAdminExample =
             MdUser("Faraon", "Love Shady", "87654322", "987654322", EnUserRoles.ADMIN)
