@@ -2,32 +2,55 @@ package com.codycod.dreamsreservation.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
+import com.codycod.dreamsreservation.data.database.AppDatabase
+import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdRoom
+import com.codycod.dreamsreservation.data.models.MdRoomPartial
+import com.codycod.dreamsreservation.data.repositories.dao.RoomPartialDao
+import com.codycod.dreamsreservation.data.repositories.viewmodels.RoomPartialViewModel
 import com.codycod.dreamsreservation.ui.adapters.ContentRoomAdapter
 import com.codycod.dreamsreservation.ui.adapters.ImagesRoomAdapter
 import com.codycod.dreamsreservation.ui.adapters.ReviewsRoomAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class InformationRoomActivity : AppCompatActivity() {
+
+    //declaration of dao and database with late init
+
+    private lateinit var getObjectRoom: MdRoom
+    private lateinit var roomViewModel: RoomPartialViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_room)
+
+
+        //init of viewmodel
+
+        roomViewModel = ViewModelProvider(this)[RoomPartialViewModel::class.java]
 
         //verify if exist object_room
 
         if (intent.hasExtra("object_room")) {
             val objectRoom = intent.getSerializableExtra("object_room") as MdRoom
+            getObjectRoom = objectRoom
 
             //get items to insert information
             val rvImagesRoom =
@@ -90,6 +113,11 @@ class InformationRoomActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.item_pm_save -> {
+                    saveRoomPartial(getObjectRoom)
+                    true
+                }
+
                 else -> false
 
             }
@@ -97,6 +125,23 @@ class InformationRoomActivity : AppCompatActivity() {
 
         popupMenu.show()
 
+    }
+
+
+    //to save a entity room partial in database
+
+    private fun saveRoomPartial(roomEntity: MdRoom) {
+        val saveRoom = MdRoomPartial(
+            image = "df",
+            price = 325f,
+            content = "frr",
+            typeRoom = EnTypeRoom.SUITES
+        )
+        try {
+            roomViewModel.createRoomPartial(saveRoom)
+        }catch (e : Exception){
+          Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
     }
 
 }

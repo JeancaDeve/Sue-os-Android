@@ -32,6 +32,7 @@
         <activity android:name=".ui.activities.InformationRoomActivity" />
         <activity android:name=".ui.activities.RoomsFilterActivity" />
         <activity android:name=".ui.activities.FormReservationActivity" />
+        <activity android:name=".ui.activities.SavedRoomActivity"/>
     </application>
 
 </manifest>

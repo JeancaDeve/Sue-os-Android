@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:theme="@style/CardView.Light">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -134,6 +135,17 @@
 
 
     </LinearLayout>
+
+    <!--icon to show rooms saved by users in this phone-->
+    <ImageButton
+        android:id="@+id/ib_saved_rooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bockmark_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/transparent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

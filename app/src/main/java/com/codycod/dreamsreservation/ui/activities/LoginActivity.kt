@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -33,11 +34,15 @@ class LoginActivity : AppCompatActivity() {
         val edtDni = findViewById<EditText>(R.id.edtDni)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
 
+        //button for show rooms saved in new activity
+        val btnSavedRooms = findViewById<ImageButton>(R.id.ib_saved_rooms)
+        btnSavedRooms.setOnClickListener {
+            startActivity(Intent(this, SavedRoomActivity::class.java))
+        }
+
         btnLogin.setOnClickListener {
             val phone = edtPhone.text.toString()
             val dni = edtDni.text.toString()
-
-
 
             when {
                 phone.isEmpty() -> {
