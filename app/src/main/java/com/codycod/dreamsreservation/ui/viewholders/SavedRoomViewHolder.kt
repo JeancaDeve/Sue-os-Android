@@ -42,7 +42,7 @@ class SavedRoomViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
             .apply(requestOptions)
             .into(imageSavedRoom)
 
-        priceSaveRoom.text = "$/.${room.price}}"
+        priceSaveRoom.text = "S/.${room.price}"
         content.text = room.content
 
     }

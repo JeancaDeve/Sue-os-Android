@@ -1,4 +1,4 @@
-package com.codycod.dreamsreservation.data.repositories.dao
+package com.codycod.dreamsreservation.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -17,6 +17,7 @@ interface RoomPartialDao {
 
     @Delete
     fun deleteRoom(room : MdRoomPartial)
+    
 
 
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.codycod.dreamsreservation.data.database.AppDatabase
 import com.codycod.dreamsreservation.data.models.MdRoomPartial
-import com.codycod.dreamsreservation.data.repositories.dao.RoomPartialDao
+import com.codycod.dreamsreservation.data.dao.RoomPartialDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,4 +17,5 @@ private val roomPartialDao = AppDatabase.getInstance(application).roomPartialDao
         }
     }
     fun getRoomsPartial() : LiveData<List<MdRoomPartial>> = roomPartialDao.getAllRooms()
+
 }

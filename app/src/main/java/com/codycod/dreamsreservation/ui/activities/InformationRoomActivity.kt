@@ -19,7 +19,7 @@ import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdRoomPartial
-import com.codycod.dreamsreservation.data.repositories.dao.RoomPartialDao
+import com.codycod.dreamsreservation.data.dao.RoomPartialDao
 import com.codycod.dreamsreservation.data.repositories.viewmodels.RoomPartialViewModel
 import com.codycod.dreamsreservation.ui.adapters.ContentRoomAdapter
 import com.codycod.dreamsreservation.ui.adapters.ImagesRoomAdapter
@@ -132,16 +132,23 @@ class InformationRoomActivity : AppCompatActivity() {
 
     private fun saveRoomPartial(roomEntity: MdRoom) {
         val saveRoom = MdRoomPartial(
-            image = "df",
-            price = 325f,
-            content = "frr",
-            typeRoom = EnTypeRoom.SUITES
+            image = Functions.divideText(roomEntity.image)[0],
+            price = roomEntity.price,
+            content = roomEntity.content,
+            typeRoom = roomEntity.typeRoom
         )
         try {
             roomViewModel.createRoomPartial(saveRoom)
-        }catch (e : Exception){
-          Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Habitación Guardada", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
+    }
+
+    //to verify if exist the room in the database
+
+    private fun verifyRoomPartial(roomEntity: MdRoomPartial) : Boolean {
+        return true
     }
 
 }

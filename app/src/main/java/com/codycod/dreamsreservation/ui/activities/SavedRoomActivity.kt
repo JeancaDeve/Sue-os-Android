@@ -10,6 +10,7 @@ import com.codycod.dreamsreservation.data.repositories.viewmodels.RoomPartialVie
 import com.codycod.dreamsreservation.ui.adapters.SavedRoomAdapter
 
 class SavedRoomActivity : AppCompatActivity() {
+
     private lateinit var savedRoomVM: RoomPartialViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,7 @@ class SavedRoomActivity : AppCompatActivity() {
 
         //set rooms for show in the recycler view
         savedRoomVM.getRoomsPartial().observe(this) { savedRooms ->
-            if (savedRooms.isEmpty()) {
+            if (savedRooms.isNotEmpty()) {
                 savedRooms?.let {
                     savedRoomAdapter.setSaveRoom(savedRooms)
                 }
