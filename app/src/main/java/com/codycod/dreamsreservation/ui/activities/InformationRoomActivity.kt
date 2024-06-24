@@ -2,7 +2,6 @@ package com.codycod.dreamsreservation.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -10,24 +9,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.data.database.AppDatabase
-import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdRoom
-import com.codycod.dreamsreservation.data.models.MdRoomPartial
-import com.codycod.dreamsreservation.data.dao.RoomPartialDao
-import com.codycod.dreamsreservation.data.repositories.viewmodels.RoomPartialViewModel
+import com.codycod.dreamsreservation.data.models.MdRoomSave
+import com.codycod.dreamsreservation.data.viewmodels.RoomSaveViewModel
 import com.codycod.dreamsreservation.ui.adapters.ContentRoomAdapter
 import com.codycod.dreamsreservation.ui.adapters.ImagesRoomAdapter
 import com.codycod.dreamsreservation.ui.adapters.ReviewsRoomAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class InformationRoomActivity : AppCompatActivity() {
@@ -35,7 +27,7 @@ class InformationRoomActivity : AppCompatActivity() {
     //declaration of dao and database with late init
 
     private lateinit var getObjectRoom: MdRoom
-    private lateinit var roomViewModel: RoomPartialViewModel
+    private lateinit var roomViewModel: RoomSaveViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +36,7 @@ class InformationRoomActivity : AppCompatActivity() {
 
         //init of viewmodel
 
-        roomViewModel = ViewModelProvider(this)[RoomPartialViewModel::class.java]
+        roomViewModel = ViewModelProvider(this)[RoomSaveViewModel::class.java]
 
         //verify if exist object_room
 
@@ -68,28 +60,22 @@ class InformationRoomActivity : AppCompatActivity() {
             rvReviews.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
             txtPrice.text = "S/. ${objectRoom.price}"
             txtDescription.setText(objectRoom.description)
             txtNRoom.text = "Nº ${objectRoom.number}"
             txtNFloor.text = "Nº ${objectRoom.floor}"
 
             //load info in recycler view
-
             rvImagesRoom.adapter = ImagesRoomAdapter(Functions.divideText(objectRoom.image))
             rvImagesRoom.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
             rvContain.adapter = ContentRoomAdapter(Functions.divideText(objectRoom.content))
-
 
             rvContain.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
         }
-
 
         //floating button and action
         val btnMoreOptions = findViewById<FloatingActionButton>(R.id.f_btn_more_options_room)
@@ -98,12 +84,13 @@ class InformationRoomActivity : AppCompatActivity() {
             showPopupMenu(it)
         }
 
-
     }
 
     //to show options of the menu and click option
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)
+
+
         popupMenu.menuInflater.inflate(R.menu.popup_menu_room_info, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
@@ -119,19 +106,16 @@ class InformationRoomActivity : AppCompatActivity() {
                 }
 
                 else -> false
-
             }
         }
-
         popupMenu.show()
-
     }
-
 
     //to save a entity room partial in database
 
     private fun saveRoomPartial(roomEntity: MdRoom) {
-        val saveRoom = MdRoomPartial(
+        val saveRoom = MdRoomSave(
+            number = roomEntity.number,
             image = Functions.divideText(roomEntity.image)[0],
             price = roomEntity.price,
             content = roomEntity.content,
@@ -139,7 +123,8 @@ class InformationRoomActivity : AppCompatActivity() {
         )
         try {
             roomViewModel.createRoomPartial(saveRoom)
-            Toast.makeText(this, "Habitación Guardada", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Habitación Guardada", Toast.LENGTH_SHORT).show()
+
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
@@ -147,8 +132,10 @@ class InformationRoomActivity : AppCompatActivity() {
 
     //to verify if exist the room in the database
 
-    private fun verifyRoomPartial(roomEntity: MdRoomPartial) : Boolean {
-        return true
+    private fun roomExist(roomEntity: MdRoom): Boolean {
+        // return roomViewModel.getRoomByNumber(roomEntity.number) != null
+        return false
+
     }
 
 }

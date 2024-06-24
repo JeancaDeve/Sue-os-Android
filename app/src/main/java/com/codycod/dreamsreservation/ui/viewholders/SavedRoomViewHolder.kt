@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.data.models.MdRoomPartial
+import com.codycod.dreamsreservation.data.models.MdRoomSave
 import com.codycod.dreamsreservation.utils.functions.Functions
 
 class SavedRoomViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
@@ -33,7 +33,7 @@ class SavedRoomViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
         .error(R.drawable.error_image)
         .placeholder(R.drawable.placeholder_image)
 
-    fun bindSavedRoom(room: MdRoomPartial) {
+    fun bindSavedRoom(room: MdRoomSave) {
         val firstImage = Functions.divideText(room.image)[0]
 
         //to load images network with Glide

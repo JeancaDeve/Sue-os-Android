@@ -4,15 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.codycod.dreamsreservation.data.models.MdRoomPartial
-import com.codycod.dreamsreservation.data.dao.RoomPartialDao
+import com.codycod.dreamsreservation.data.models.MdRoomSave
+import com.codycod.dreamsreservation.data.dao.RoomSaveDao
 
-@Database(entities = [MdRoomPartial::class], version = 1)
+@Database(entities = [MdRoomSave::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun roomPartialDao(): RoomPartialDao
+    abstract fun roomSaveDao(): RoomSaveDao
 
     companion object {
-        private const val DATABASE_NAME = "dreams_database"
+        private const val DATABASE_NAME = "dreams_db"
 
         @Volatile
         private var instance: AppDatabase? = null
