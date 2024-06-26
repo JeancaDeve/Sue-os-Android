@@ -5,7 +5,7 @@ import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import java.io.Serializable
 
 data class MdRoom(
-    val description: Int, //change to string later
+    val description: String,
     val price: Float,
     val image: String,
     val floor: Short,
@@ -14,9 +14,4 @@ data class MdRoom(
     val status: EnRoomStatus,
     val typeRoom: EnTypeRoom,
     var reviews: ArrayList<MdReview>
-) : Serializable {
-    val code: Long = 0
-}
-
-
-
+) : Serializable

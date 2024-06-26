@@ -2,6 +2,7 @@ package com.codycod.dreamsreservation.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -9,26 +10,37 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.data.enums.EnUserRoles
 import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdUser
+import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
+import com.codycod.dreamsreservation.data.viewmodels.RegisterUserViewModel
+import com.codycod.dreamsreservation.utils.functions.Functions
+import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
 
-
+    private lateinit var fireBaseViewModel: RegisterUserViewModel
+    private lateinit var dniViewModel: DniViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val splashScreen = installSplashScreen()
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
-
         splashScreen.setKeepOnScreenCondition { false }
+
+
+        //init of viewmodel
+
+        fireBaseViewModel = ViewModelProvider(this)[RegisterUserViewModel::class.java]
+        dniViewModel = ViewModelProvider(this)[DniViewModel::class.java]
+
 
         val edtPhone = findViewById<EditText>(R.id.edtcelular)
         val edtDni = findViewById<EditText>(R.id.edtDni)
@@ -68,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                 else -> authorization(phone, dni)
+
             }
         }
     }
@@ -83,26 +96,58 @@ class LoginActivity : AppCompatActivity() {
     }
 
     // to verify if the user exists in the list of users and verify the role
+
+
+    //* verify this method --- fail --- register multiple users
     private fun authorization(phone: String, dni: String) {
+        lifecycleScope.launch {
+            try {
+                val userExist = fireBaseViewModel.verifyExistUser(dni, phone)
 
-        val user: MdUser? = findUser(phone, dni)
+                if (!userExist) {
 
-        if (user != null) {
-            when (user.role) {
-                EnUserRoles.COMMON_USER ->
-                    startActivity(Intent(this, MenuCustomerActivity::class.java))
+                    //createUser(dni, phone)
+                  // Log.d("auth", "Usuario Registrado")
 
-                EnUserRoles.ADMIN -> Toast.makeText(
-                    this,
-                    "Esta cuenta es administradora",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                }else{
+                    Log.d("existe","Este ya existe")
+                }
+                startActivity(Intent(this@LoginActivity, MenuCustomerActivity::class.java))
+
+
+
+            } catch (_: Exception) {
+
             }
-        } else Toast.makeText(this, "El usuario no existe", Toast.LENGTH_SHORT)
-            .show()
+        }
+    }
+
+    //to insert user in firestore
+    private fun createUser(dni: String, phone: String) {
+
+        Functions.withInformationUserWithDni(
+            dni,
+            phone,
+            dniViewModel,
+            this
+        ) { user ->
+            fireBaseViewModel.registerUser(user)
+            Toast.makeText(this, "Bienvenido ${user.name}", Toast.LENGTH_SHORT).show()
+            Log.d("Create" , "suuario crearado")
+        }
+    }
+
+
+    private fun verifyViewModel() {
+        fireBaseViewModel.userRegisterStatus.observe(this, Observer { isSuceesful ->
+            if (isSuceesful) {
+
+            }
+        })
+
 
     }
+
 
     //to find user by phone number and dni
     private fun findUser(phone: String, dni: String): MdUser? {

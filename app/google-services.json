@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60895830049",
+    "project_id": "dreams-reservation",
+    "storage_bucket": "dreams-reservation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60895830049:android:8c3e550cd473c38fa9c360",
+        "android_client_info": {
+          "package_name": "com.codycod.dreamsreservation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOHP-qlQQI6PaVPncbHhnLoTupIhqrrq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,7 +20,7 @@ class ContentExample {
             MdUser("Kevin", "Fernandez", "87654321", "987654321", EnUserRoles.COMMON_USER)
 
         private val roomExample01 = MdRoom(
-            R.string.large_text_example,
+            "Hbaitacion bonita",
             100f,
             "https://img.freepik.com/fotos-premium/habitaciones-4_1045419-15.jpg - https://eu-central-1.linodeobjects.com/tecnohotelnews/2022/12/image004-2-1.jpg",
             4,
@@ -32,7 +32,7 @@ class ContentExample {
         )
 
         private val roomExample02 = MdRoom(
-            R.string.large_text_example,
+            "habitacion fea",
             400f,
             "https://www.hola.com/imagenes/decoracion/20230425230358/dormitorios-inspirados-en-habitaciones-hoteles-am/1-237-29/habitaciones-hotel-6a-a.jpg - https://cdn.shopify.com/s/files/1/0417/8349/2759/files/Habitacion-Modenrna-y-minimalista_large.jpg?v=1595955799",
             4,

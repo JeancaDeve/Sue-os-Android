@@ -9,16 +9,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.ui.activities.RoomsFilterActivity
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
-import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdButtonTypeRoom
+import com.codycod.dreamsreservation.data.viewmodels.RoomsViewModel
 import com.codycod.dreamsreservation.ui.adapters.RoomsListAdapter
 
 class RoomsFragment : Fragment() {
+
+    private lateinit var roomViewModel: RoomsViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,20 +35,31 @@ class RoomsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //get recyclerViews
+        //get recyclerView
         val rvMatrimonial = view.findViewById<RecyclerView>(R.id.rv_habitaciones_matri)
 
+        val roomsListAdapter = RoomsListAdapter()
 
+        roomViewModel = ViewModelProvider(this)[RoomsViewModel::class.java]
 
-
-        rvMatrimonial.adapter = RoomsListAdapter(Functions.listRoomsByContent())
+        //set properties in recycler view
         rvMatrimonial.layoutManager = LinearLayoutManager(
             view.context, LinearLayoutManager.HORIZONTAL, false
         )
+        rvMatrimonial.adapter = roomsListAdapter
 
+
+        //set rooms of firebase
+
+        roomViewModel.listRooms.observe(viewLifecycleOwner, Observer { rooms ->
+            roomsListAdapter.setRooms(rooms)
+        })
+
+
+        //load rooms
+        roomViewModel.getAvailableRoomsByType()
 
         //get container buttons of type room
-
         val containerButtons = view.findViewById<LinearLayout>(R.id.container_buttons_type_room)
 
         val listButtons = listOf(
@@ -54,6 +69,7 @@ class RoomsFragment : Fragment() {
             MdButtonTypeRoom("INDIVIDUAL", EnTypeRoom.INDIVIDUAL, false)
         )
 
+        //to verify the type request
         listButtons.forEach { buttonInfo ->
             val button =
                 Button(ContextThemeWrapper(view.context, R.style.ButtonTypeRoomStyle)).apply {
@@ -61,29 +77,25 @@ class RoomsFragment : Fragment() {
                     setOnClickListener {
                         when (buttonInfo.typeRoom) {
                             buttonInfo.typeRoom -> {
-                                rvMatrimonial.adapter =
-                                    RoomsListAdapter(Functions.listRoomsByType(buttonInfo.typeRoom))
+                                roomViewModel.getAvailableRoomsByType(buttonInfo.typeRoom)
                                 buttonInfo.isActive = !buttonInfo.isActive
                             }
 
                             else -> {}
                         }
                     }
-
                 }
             containerButtons.addView(button)
         }
-
         //set action search
         val searchBtn = view.findViewById<LinearLayout>(R.id.btn_input_search)
 
         searchBtn.setOnClickListener {
             startActivity(Intent(view.context, RoomsFilterActivity::class.java))
         }
-
-
     }
 
+    //instance of RoomFragment
     companion object {
         fun newInstance(): RoomsFragment = RoomsFragment()
     }

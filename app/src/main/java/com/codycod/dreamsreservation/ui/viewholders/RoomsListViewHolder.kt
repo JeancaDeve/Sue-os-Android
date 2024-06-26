@@ -37,7 +37,7 @@ class RoomsListViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
             .into(imgRoom)
 
 
-        txtDescription.setText(mdRoom.description)
+        txtDescription.text = mdRoom.description
         txtPrice.text = "S/.${mdRoom.price}"
     }
 

@@ -10,8 +10,18 @@ import com.codycod.dreamsreservation.ui.activities.InformationRoomActivity
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.ui.viewholders.RoomsListViewHolder
 
-class RoomsListAdapter(private val list: List<MdRoom>) :
+class RoomsListAdapter() :
     RecyclerView.Adapter<RoomsListViewHolder>() {
+
+
+    private var list = emptyList<MdRoom>()
+
+
+    fun setRooms(rooms: List<MdRoom>) {
+        this.list = rooms
+        this.notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return RoomsListViewHolder(inflater, parent)

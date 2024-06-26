@@ -10,8 +10,17 @@ import com.codycod.dreamsreservation.ui.activities.InformationRoomActivity
 import com.codycod.dreamsreservation.ui.viewholders.RoomsFilterViewHolder
 import com.codycod.dreamsreservation.data.models.MdRoom
 
-class RoomsFilterAdapter(private val listRoomsFilter: List<MdRoom>) :
+class RoomsFilterAdapter() :
     RecyclerView.Adapter<RoomsFilterViewHolder>() {
+
+
+    private var listRoomsFilter = emptyList<MdRoom>()
+
+    fun setRoomsFilter(listRoomsFilter: List<MdRoom>) {
+        this.listRoomsFilter = listRoomsFilter
+        this.notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsFilterViewHolder =
         RoomsFilterViewHolder(LayoutInflater.from(parent.context), parent)
 

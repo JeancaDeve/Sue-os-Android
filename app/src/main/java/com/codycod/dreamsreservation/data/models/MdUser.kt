@@ -9,6 +9,4 @@ data class MdUser(
     val dni: String,
     val phone: String,
     val role: EnUserRoles
-) : Serializable{
-    val code: Long = 0
-}
+)
