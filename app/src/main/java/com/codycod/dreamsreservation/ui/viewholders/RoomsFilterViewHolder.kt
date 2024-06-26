@@ -20,7 +20,7 @@ class RoomsFilterViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
 
     fun bind(room: MdRoom) {
 
-        val listImages = Functions.divideText(room.image)
+        val listImages = room.image
 
         Glide.with(itemView.context)
             .load(listImages[0])

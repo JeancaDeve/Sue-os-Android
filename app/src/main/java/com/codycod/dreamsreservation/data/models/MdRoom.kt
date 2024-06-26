@@ -7,9 +7,9 @@ import java.io.Serializable
 data class MdRoom(
     val description: String,
     val price: Float,
-    val image: String,
+    val image: List<String>,
     val floor: Short,
-    val content: String,
+    val content: List<String>,
     val number: Short,
     val status: EnRoomStatus,
     val typeRoom: EnTypeRoom,

@@ -52,7 +52,7 @@ class RoomsViewModel : ViewModel() {
             }
     }
 
-    //correction
+    //correction to list by content not explicit
 
     fun getRoomByContent(content: String? = null) {
         val collection = firestore.collection("rooms")

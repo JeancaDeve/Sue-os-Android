@@ -31,17 +31,6 @@ class Functions {
             return text.split(delimiter)
         }
 
-        //to rooms list by content
-        fun listRoomsByContent(filterContent: String? = null): List<MdRoom> {
-            return if (filterContent.isNullOrEmpty())
-                ContentExample.roomsList
-            else ContentExample.roomsList.filter { room ->
-                room.content.contains(
-                    filterContent,
-                    ignoreCase = true
-                )
-            }
-        }
 
         //to list by type room
 
@@ -76,6 +65,19 @@ class Functions {
             })
         }
 
+        //convert a array to string
+
+        fun arrayToString(list: List<String>): String {
+            var text: String = ""
+
+            for (s in list) {
+                text += "$s - "
+            }
+
+            return text
+
+        }
+
 
         //to parse data of json in object MdRoom
 
@@ -103,15 +105,15 @@ class Functions {
 
 
             val roomModel = MdRoom(
-                image = dataJson["image"] as? String ?: "",
+                image = dataJson["image"] as? List<String> ?: emptyList(),
                 typeRoom = EnTypeRoom.valueOf(dataJson["typeRoom"] as String),
                 number = (dataJson["number"] as? Number)?.toShort() ?: 0,
                 price = (dataJson["price"] as? Number)?.toFloat() ?: 0f,
-                content = dataJson["content"] as? String ?: "",
+                content = dataJson["content"] as? List<String> ?: emptyList(),
                 description = dataJson["description"] as? String ?: "",
                 floor = (dataJson["floor"] as? Number)?.toShort() ?: 0,
                 status = EnRoomStatus.valueOf(dataJson["status"] as String),
-                reviews =  ArrayList()
+                reviews = ArrayList()
             )
 
             return roomModel

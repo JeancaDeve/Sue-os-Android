@@ -22,9 +22,9 @@ class ContentExample {
         private val roomExample01 = MdRoom(
             "Hbaitacion bonita",
             100f,
-            "https://img.freepik.com/fotos-premium/habitaciones-4_1045419-15.jpg - https://eu-central-1.linodeobjects.com/tecnohotelnews/2022/12/image004-2-1.jpg",
+            emptyList(),
             4,
-            "Una cama - Una TV 35'",
+            emptyList(),
             200,
             EnRoomStatus.AVAILABLE,
             EnTypeRoom.MATRIMONIAL,
@@ -34,9 +34,9 @@ class ContentExample {
         private val roomExample02 = MdRoom(
             "habitacion fea",
             400f,
-            "https://www.hola.com/imagenes/decoracion/20230425230358/dormitorios-inspirados-en-habitaciones-hoteles-am/1-237-29/habitaciones-hotel-6a-a.jpg - https://cdn.shopify.com/s/files/1/0417/8349/2759/files/Habitacion-Modenrna-y-minimalista_large.jpg?v=1595955799",
+            emptyList(),
             4,
-            "Una cama - Una TV 35' - Un sillon Tantrico - Un tubo",
+            emptyList(),
             500,
             EnRoomStatus.AVAILABLE,
             EnTypeRoom.SUITES,

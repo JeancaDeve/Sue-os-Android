@@ -66,11 +66,11 @@ class InformationRoomActivity : AppCompatActivity() {
             txtNFloor.text = "Nº ${objectRoom.floor}"
 
             //load info in recycler view
-            rvImagesRoom.adapter = ImagesRoomAdapter(Functions.divideText(objectRoom.image))
+            rvImagesRoom.adapter = ImagesRoomAdapter(objectRoom.image)
             rvImagesRoom.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-            rvContain.adapter = ContentRoomAdapter(Functions.divideText(objectRoom.content))
+            rvContain.adapter = ContentRoomAdapter(objectRoom.content)
 
             rvContain.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -116,9 +116,9 @@ class InformationRoomActivity : AppCompatActivity() {
     private fun saveRoomPartial(roomEntity: MdRoom) {
         val saveRoom = MdRoomSave(
             number = roomEntity.number,
-            image = Functions.divideText(roomEntity.image)[0],
+            image = roomEntity.image[0],
             price = roomEntity.price,
-            content = roomEntity.content,
+            content = Functions.arrayToString(roomEntity.content),
             typeRoom = roomEntity.typeRoom
         )
         try {

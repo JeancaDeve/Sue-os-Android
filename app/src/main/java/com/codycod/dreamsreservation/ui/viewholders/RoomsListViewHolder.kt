@@ -22,7 +22,7 @@ class RoomsListViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
 
 
     fun bind(mdRoom: MdRoom) {
-        val listImages = Functions.divideText(mdRoom.image)
+        val listImages = mdRoom.image
 
         val options = RequestOptions()
             .override(500, 500)
