@@ -8,5 +8,7 @@ class Messages {
 
         const val PHONE_REQUIRED = "Porfavor ingrese el número de celular"
         const val DNI_REQUIRED = "Porfavor ingrese el número de dni"
+
+        const val USER_EXIST = "El usuario ya existe :("
     }
 }

@@ -11,7 +11,7 @@ class RegisterUserViewModel : ViewModel() {
     private val firestoreInstance = FirebaseFirestore.getInstance()
     val userIsRegister = MutableLiveData<Boolean>()
     val userRegister = MutableLiveData<MdUser?>()
-
+    val userNoExist = MutableLiveData(false)
 
     fun registerUser(user: MdUser) {
         registerUserInFireStore(user)
@@ -42,5 +42,23 @@ class RegisterUserViewModel : ViewModel() {
             }
     }
 
-
+    //to add a user with dni and phone number uniques
+    private fun userNotExist(dni: String, phone: String) {
+        val collection = firestoreInstance.collection("usuarios")
+        collection
+            .whereEqualTo("dni", dni)
+            .get()
+            .addOnSuccessListener { documentsByDni ->
+                if (documentsByDni.isEmpty) {
+                    collection
+                        .whereEqualTo("phone", phone)
+                        .get()
+                        .addOnSuccessListener { documentsByPhone ->
+                            if (documentsByPhone.isEmpty) {
+                                userNoExist.value = true
+                            }
+                        }
+                }
+            }
+    }
 }

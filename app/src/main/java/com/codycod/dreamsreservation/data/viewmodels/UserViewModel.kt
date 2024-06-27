@@ -15,7 +15,6 @@ class UserViewModel : ViewModel() {
     //this is user get in the query
     val user = MutableLiveData<MdUser?>()
 
-
     //to get user by dni and phone number
     fun getUserByDniAndPhone(dni: String, phone: String) {
         collection

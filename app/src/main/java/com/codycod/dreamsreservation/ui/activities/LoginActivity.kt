@@ -128,14 +128,20 @@ class LoginActivity : AppCompatActivity() {
     //to insert user in firestore
     private fun createUser(dni: String, phone: String) {
 
-        Functions.withInformationUserWithDni(
-            dni,
-            phone,
-            dniViewModel,
-            this
-        ) { user ->
-            user?.let { fireBaseViewModel.registerUser(it) }
-        }
+        fireBaseViewModel.userNoExist.observe(this, Observer { notExist ->
+            if (notExist) {
+                Functions.withInformationUserWithDni(
+                    dni,
+                    phone,
+                    dniViewModel,
+                    this
+                ) { user ->
+                    user?.let { fireBaseViewModel.registerUser(it) }
+                }
+            } else {
+                Functions.customToast(Messages.USER_EXIST, this)
+            }
+        })
 
 
     }
