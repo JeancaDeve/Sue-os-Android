@@ -2,7 +2,6 @@ package com.codycod.dreamsreservation.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,21 +11,26 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.data.enums.EnUserRoles
-import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
 import com.codycod.dreamsreservation.data.viewmodels.RegisterUserViewModel
+import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
 import com.codycod.dreamsreservation.utils.functions.Functions
-import kotlinx.coroutines.launch
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var fireBaseViewModel: RegisterUserViewModel
     private lateinit var dniViewModel: DniViewModel
+    private lateinit var userViewModel: UserViewModel
+
+    companion object {
+        private var userLogin: MdUser? = null
+    }
+
+    //this user that is logged in
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val splashScreen = installSplashScreen()
@@ -37,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         //init of viewmodel
-
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         fireBaseViewModel = ViewModelProvider(this)[RegisterUserViewModel::class.java]
         dniViewModel = ViewModelProvider(this)[DniViewModel::class.java]
 
@@ -78,9 +82,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "DNI incorrecto", Toast.LENGTH_SHORT).show()
                 }
 
-
                 else -> authorization(phone, dni)
-
             }
         }
     }
@@ -95,31 +97,38 @@ class LoginActivity : AppCompatActivity() {
         return dni.length >= 8 && dni.all { it.isDigit() } // DNI en Perú tiene 8 dígitos
     }
 
-    // to verify if the user exists in the list of users and verify the role
-
 
     //* verify this method --- fail --- register multiple users
     private fun authorization(phone: String, dni: String) {
-        lifecycleScope.launch {
-            try {
-                val userExist = fireBaseViewModel.verifyExistUser(dni, phone)
 
-                if (!userExist) {
+        //this is a new activity main
 
-                    //createUser(dni, phone)
-                  // Log.d("auth", "Usuario Registrado")
+        val intent = Intent(this, MenuCustomerActivity::class.java)
 
-                }else{
-                    Log.d("existe","Este ya existe")
-                }
-                startActivity(Intent(this@LoginActivity, MenuCustomerActivity::class.java))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
+        //get user
+        userViewModel.getUserByDniAndPhone(dni, phone)
 
+        userViewModel.user.observe(this, Observer { user ->
+            userLogin = user
+            //when the user with set information not exist
+            if (userLogin == null) {
+                //create a new user
+                createUser(dni, phone)
 
-            } catch (_: Exception) {
+                fireBaseViewModel.userIsRegister.observe(this, Observer {
+                    if (it) {
+                        startActivity(intent)
+                    }
+                })
 
+            } else {
+                startActivity(intent)
             }
-        }
+        })
+
+
     }
 
     //to insert user in firestore
@@ -131,27 +140,12 @@ class LoginActivity : AppCompatActivity() {
             dniViewModel,
             this
         ) { user ->
-            fireBaseViewModel.registerUser(user)
-            Toast.makeText(this, "Bienvenido ${user.name}", Toast.LENGTH_SHORT).show()
-            Log.d("Create" , "suuario crearado")
+            user?.let { fireBaseViewModel.registerUser(it) }
+            Toast.makeText(this, "Bienvenido ${user?.name}", Toast.LENGTH_SHORT).show()
         }
-    }
-
-
-    private fun verifyViewModel() {
-        fireBaseViewModel.userRegisterStatus.observe(this, Observer { isSuceesful ->
-            if (isSuceesful) {
-
-            }
-        })
 
 
     }
 
-
-    //to find user by phone number and dni
-    private fun findUser(phone: String, dni: String): MdUser? {
-        return ContentExample.userList.find { user -> user.phone == phone && user.dni == dni }
-    }
 
 }

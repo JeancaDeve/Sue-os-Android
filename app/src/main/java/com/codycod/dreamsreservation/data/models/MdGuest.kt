@@ -5,7 +5,4 @@ data class MdGuest(
     val lastname: String,
     val dni: String,
     val phone: String,
-    //val reservations : ArrayList<MdReservation>
-) {
-    val code: Long = 0
-}
+)

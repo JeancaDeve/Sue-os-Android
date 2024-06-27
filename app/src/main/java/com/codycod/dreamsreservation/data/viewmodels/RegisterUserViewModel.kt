@@ -1,19 +1,15 @@
 package com.codycod.dreamsreservation.data.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdUser
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.tasks.await
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class RegisterUserViewModel : ViewModel() {
 
     //get instance of firestore
     private val firestoreInstance = FirebaseFirestore.getInstance()
-    val userRegisterStatus = MutableLiveData<Boolean>()
+    val userIsRegister = MutableLiveData<Boolean>()
 
 
 
@@ -35,24 +31,13 @@ class RegisterUserViewModel : ViewModel() {
             .document()
             .set(userJson)
             .addOnCompleteListener {
-                userRegisterStatus.value = it.isSuccessful
+                userIsRegister.value = it.isSuccessful
             }
-
-
+            .addOnFailureListener {
+                userIsRegister.value = false
+            }
     }
 
-
-    suspend fun verifyExistUser(dni: String, phone: String) : Boolean {
-        val usersCollection = FirebaseFirestore.getInstance().collection("usuarios")
-
-        val querySnapshot = usersCollection.whereEqualTo("dni", dni)
-            .whereEqualTo("phone", phone)
-            .get()
-            .await()
-
-        return !querySnapshot.isEmpty
-
-    }
 
 
 }

@@ -5,17 +5,14 @@ import androidx.lifecycle.Observer
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.enums.EnUserRoles
-import com.codycod.dreamsreservation.data.models.MdReview
+import com.codycod.dreamsreservation.data.models.MdResponseApiReniec
 import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class Functions {
     companion object {
@@ -47,22 +44,32 @@ class Functions {
             phone: String,
             viewModel: DniViewModel,
             lifecycleOwner: LifecycleOwner,
-            callback: (MdUser) -> Unit
+            callback: (MdUser?) -> Unit
         ) {
             viewModel.fetchDniData("apis-token-8772.gtR7nYBjQE8WiVlObpqlVpWdwxax128c", dniNumber)
+            val observer = object : Observer<MdResponseApiReniec?> {
+                override fun onChanged(value: MdResponseApiReniec?) {
+                    viewModel.dniData.removeObserver(this)
 
-            viewModel.dniData.observe(lifecycleOwner, Observer { dataResponse ->
-                if (dataResponse != null) {
-                    val user = MdUser(
-                        dni = dataResponse.numeroDocumento ?: "",
-                        name = dataResponse.nombres ?: "",
-                        lastname = "${dataResponse.apellidoPaterno} ${dataResponse.apellidoMaterno}",
-                        phone = phone,
-                        role = EnUserRoles.COMMON_USER,
-                    )
-                    callback(user)
+                    if (value != null) {
+                        val user = MdUser(
+                            dni = value.numeroDocumento,
+                            name = value.nombres,
+                            lastname = "${value.apellidoPaterno} ${value.apellidoMaterno}",
+                            phone = phone,
+                            role = EnUserRoles.COMMON_USER,
+                        )
+                        callback(user)
+                    } else {
+                        callback(null)
+                    }
+
                 }
-            })
+
+            }
+
+            viewModel.dniData.observe(lifecycleOwner,observer)
+
         }
 
         //convert a array to string
@@ -117,6 +124,16 @@ class Functions {
             )
 
             return roomModel
+        }
+
+        fun parseUserJson(dataJson: MutableMap<String, Any>): MdUser {
+            return MdUser(
+                role = EnUserRoles.valueOf(dataJson["role"] as String),
+                dni = dataJson["dni"] as String,
+                phone = dataJson["phone"] as String,
+                name = dataJson["name"] as String,
+                lastname = dataJson["lastname"] as String
+            )
         }
 
 
