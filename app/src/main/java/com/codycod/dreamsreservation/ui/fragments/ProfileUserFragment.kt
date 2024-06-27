@@ -1,5 +1,6 @@
 package com.codycod.dreamsreservation.ui.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,10 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.codycod.dreamsreservation.R
+import com.codycod.dreamsreservation.data.enums.EnUserRoles
+import com.codycod.dreamsreservation.data.models.MdUser
+import com.codycod.dreamsreservation.ui.activities.LoginActivity
 import com.codycod.dreamsreservation.ui.activities.MyReservationsActivity
+import com.codycod.dreamsreservation.utils.Functions
 
 
 class ProfileUserFragment : Fragment() {
@@ -24,6 +30,22 @@ class ProfileUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //get textview
+
+        val nameText = view.findViewById<TextView>(R.id.info_user_name)
+        val phoneText = view.findViewById<TextView>(R.id.info_user_phone)
+        val dniText = view.findViewById<TextView>(R.id.info_user_dni)
+
+        //this is a user get information in login
+
+        val userinfo = Functions.getUserInfo(view.context)
+
+        //to load info user in items
+        nameText.text = "${userinfo.name} ${userinfo.lastname}"
+        phoneText.text = userinfo.phone
+        dniText.text = userinfo.dni
+
 
         //get btn to see reservations
         val btnReservations = view.findViewById<LinearLayout>(R.id.btn_reservas_profile)
@@ -50,25 +72,8 @@ class ProfileUserFragment : Fragment() {
 
     }
 
-
-    private fun openGoogleMaps(latitude: Double, longitude: Double, label: String) {
-        val gmmIntentUri = Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude($label)")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.gms.maps") // Paquete de la aplicación de Google Maps
-
-        val context = context
-        if (context != null && mapIntent.resolveActivity(context.packageManager) != null) {
-            startActivity(mapIntent)
-        } else {
-            // Google Maps app is not installed
-            Toast.makeText(context, "Google Maps is not installed.", Toast.LENGTH_LONG).show()
-        }
-    }
-
-
     companion object {
         fun newInstance(): ProfileUserFragment = ProfileUserFragment()
     }
-
 
 }

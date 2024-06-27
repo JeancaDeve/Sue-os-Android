@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.ui.adapters.RoomsFilterAdapter
-import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.viewmodels.RoomsViewModel
 

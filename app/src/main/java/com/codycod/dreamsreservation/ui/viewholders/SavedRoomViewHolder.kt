@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.data.models.MdRoomSave
-import com.codycod.dreamsreservation.utils.functions.Functions
+import com.codycod.dreamsreservation.utils.Functions
 
 class SavedRoomViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :
     RecyclerView.ViewHolder(

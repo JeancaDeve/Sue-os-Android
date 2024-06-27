@@ -3,11 +3,10 @@ package com.codycod.dreamsreservation.data.viewmodels
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.room.util.query
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.models.MdRoom
-import com.codycod.dreamsreservation.utils.functions.Functions
+import com.codycod.dreamsreservation.utils.Functions
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RoomsViewModel : ViewModel() {

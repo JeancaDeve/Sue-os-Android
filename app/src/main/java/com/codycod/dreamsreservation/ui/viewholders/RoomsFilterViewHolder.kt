@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.utils.functions.Functions
 import com.codycod.dreamsreservation.data.models.MdRoom
 
 class RoomsFilterViewHolder(inflater: LayoutInflater, viewGroup: ViewGroup) :

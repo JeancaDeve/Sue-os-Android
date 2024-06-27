@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdUser
-import com.codycod.dreamsreservation.utils.functions.Functions
+import com.codycod.dreamsreservation.utils.Functions
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserViewModel : ViewModel() {

@@ -1,5 +1,7 @@
-package com.codycod.dreamsreservation.utils.functions
+package com.codycod.dreamsreservation.utils
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
@@ -10,6 +12,7 @@ import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExamp
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
+import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -68,9 +71,10 @@ class Functions {
 
             }
 
-            viewModel.dniData.observe(lifecycleOwner,observer)
+            viewModel.dniData.observe(lifecycleOwner, observer)
 
         }
+
 
         //convert a array to string
 
@@ -134,6 +138,57 @@ class Functions {
                 name = dataJson["name"] as String,
                 lastname = dataJson["lastname"] as String
             )
+        }
+
+        //to verify phone number is valid for peru
+        fun invalidPhone(phone: String): Boolean {
+            return !(phone.length >= 9 && phone.all { it.isDigit() })
+        }
+
+        // to verify dni is valid for peru
+        fun invalidDni(dni: String): Boolean {
+            return !(dni.length >= 8 && dni.all { it.isDigit() })
+        }
+
+        //custom toast|
+
+        fun customToast(
+            message: String,
+            context: Context,
+            duration: Int = Toast.LENGTH_SHORT
+        ) =
+            Toast.makeText(context, message, duration).show()
+
+
+        //to save info of user to show info in others activities
+        fun saveInfoUser(user: MdUser, context: Context) {
+            val sharedPref = context.getSharedPreferences("user_info", Context.MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("nameUser", user.name)
+                putString("lastnameUser", user.lastname)
+                putString("phoneUser", user.phone)
+                putString("dniUser", user.dni)
+                apply()
+            }
+        }
+
+        //to get info user saved in shared preferences
+        fun getUserInfo(context: Context): MdUser {
+            val sharedPreferences =
+                context.getSharedPreferences("user_info", Context.MODE_PRIVATE)
+            val name = sharedPreferences?.getString("nameUser", "Username")
+            val lastname = sharedPreferences?.getString("lastnameUser", "Lastname")
+            val dni = sharedPreferences?.getString("dniUser", "DNI")
+            val phone = sharedPreferences?.getString("phoneUser", "Phone")
+
+            return MdUser(
+                name = name!!,
+                lastname = lastname!!,
+                dni = dni!!,
+                phone = phone!!,
+                role = EnUserRoles.COMMON_USER
+            )
+
         }
 
 

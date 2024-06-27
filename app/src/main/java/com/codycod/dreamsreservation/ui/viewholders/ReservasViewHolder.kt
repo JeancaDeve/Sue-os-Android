@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.utils.functions.Functions
+import com.codycod.dreamsreservation.utils.Functions
 import com.codycod.dreamsreservation.data.models.MdReservation
 
 

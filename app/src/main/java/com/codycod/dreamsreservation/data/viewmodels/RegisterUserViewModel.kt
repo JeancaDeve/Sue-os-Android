@@ -10,7 +10,7 @@ class RegisterUserViewModel : ViewModel() {
     //get instance of firestore
     private val firestoreInstance = FirebaseFirestore.getInstance()
     val userIsRegister = MutableLiveData<Boolean>()
-
+    val userRegister = MutableLiveData<MdUser?>()
 
 
     fun registerUser(user: MdUser) {
@@ -32,12 +32,15 @@ class RegisterUserViewModel : ViewModel() {
             .set(userJson)
             .addOnCompleteListener {
                 userIsRegister.value = it.isSuccessful
+                if (it.isSuccessful) {
+                    userRegister.value = user
+                }
             }
             .addOnFailureListener {
                 userIsRegister.value = false
+                userRegister.value = null
             }
     }
-
 
 
 }

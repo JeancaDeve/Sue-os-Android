@@ -1,5 +1,6 @@
 package com.codycod.dreamsreservation.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -16,7 +17,8 @@ import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
 import com.codycod.dreamsreservation.data.viewmodels.RegisterUserViewModel
 import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
-import com.codycod.dreamsreservation.utils.functions.Functions
+import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.Messages
 
 
 class LoginActivity : AppCompatActivity() {
@@ -25,9 +27,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var dniViewModel: DniViewModel
     private lateinit var userViewModel: UserViewModel
 
-    companion object {
-        private var userLogin: MdUser? = null
-    }
+
+    private var userLogin: MdUser? = null
+
 
     //this user that is logged in
 
@@ -61,50 +63,26 @@ class LoginActivity : AppCompatActivity() {
             val dni = edtDni.text.toString()
 
             when {
-                phone.isEmpty() -> {
-                    Toast.makeText(
-                        this,
-                        "Porfavor, ingrese su número de celular",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                phone.isEmpty() -> Functions.customToast(Messages.PHONE_REQUIRED, this)
 
-                dni.isEmpty() -> {
-                    Toast.makeText(this, "Por favor, ingrese su DNI", Toast.LENGTH_SHORT).show()
-                }
+                dni.isEmpty() -> Functions.customToast(Messages.DNI_REQUIRED, this)
 
-                !isValidCelular(phone) -> {
-                    Toast.makeText(this, "Número celular incorrecto", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                Functions.invalidPhone(phone) -> Functions.customToast(Messages.INVALID_PHONE, this)
 
-                !isValidDni(dni) -> {
-                    Toast.makeText(this, "DNI incorrecto", Toast.LENGTH_SHORT).show()
-                }
+                Functions.invalidDni(dni) -> Functions.customToast(Messages.INVALID_DNI, this)
 
                 else -> authorization(phone, dni)
             }
         }
     }
 
-    //to verify phone number is valid for peru
-    private fun isValidCelular(celular: String): Boolean {
-        return celular.length >= 9 && celular.all { it.isDigit() }
-    }
-
-    // to verify dni is valid for peru
-    private fun isValidDni(dni: String): Boolean {
-        return dni.length >= 8 && dni.all { it.isDigit() } // DNI en Perú tiene 8 dígitos
-    }
-
 
     //* verify this method --- fail --- register multiple users
     private fun authorization(phone: String, dni: String) {
-
         //this is a new activity main
-
         val intent = Intent(this, MenuCustomerActivity::class.java)
 
+        //to clear all before activities
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         //get user
@@ -116,14 +94,30 @@ class LoginActivity : AppCompatActivity() {
             if (userLogin == null) {
                 //create a new user
                 createUser(dni, phone)
-
+                //observe if userRegistered is true or false
                 fireBaseViewModel.userIsRegister.observe(this, Observer {
                     if (it) {
-                        startActivity(intent)
+                        //observe user register and get information
+                        fireBaseViewModel.userRegister.observe(this, Observer { userRegister ->
+                            if (userRegister != null) {
+
+                                Functions.customToast(
+                                    Messages.welcome(userRegister.name),
+                                    this,
+                                    Toast.LENGTH_LONG
+                                )
+
+                                //save info of user logged in shared preferences
+                                Functions.saveInfoUser(userRegister, this)
+                                startActivity(intent)
+                            }
+                        })
                     }
                 })
 
             } else {
+                //save info of user logged in shared preferences
+                Functions.saveInfoUser(userLogin!!, this)
                 startActivity(intent)
             }
         })
@@ -141,7 +135,6 @@ class LoginActivity : AppCompatActivity() {
             this
         ) { user ->
             user?.let { fireBaseViewModel.registerUser(it) }
-            Toast.makeText(this, "Bienvenido ${user?.name}", Toast.LENGTH_SHORT).show()
         }
 
 
