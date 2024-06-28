@@ -18,11 +18,13 @@ import com.codycod.dreamsreservation.ui.activities.RoomsFilterActivity
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.models.MdButtonTypeRoom
 import com.codycod.dreamsreservation.data.viewmodels.RoomsViewModel
+import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
 import com.codycod.dreamsreservation.ui.adapters.RoomsListAdapter
 
 class RoomsFragment : Fragment() {
 
     private lateinit var roomViewModel: RoomsViewModel
+    private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +43,7 @@ class RoomsFragment : Fragment() {
         val roomsListAdapter = RoomsListAdapter()
 
         roomViewModel = ViewModelProvider(this)[RoomsViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         //set properties in recycler view
         rvMatrimonial.layoutManager = LinearLayoutManager(
@@ -57,7 +60,7 @@ class RoomsFragment : Fragment() {
 
 
         //load rooms
-        roomViewModel.getAvailableRoomsByType()
+        roomViewModel.getAvailableRoomsByType(lifecycleOwner = this, userViewModel = userViewModel)
 
         //get container buttons of type room
         val containerButtons = view.findViewById<LinearLayout>(R.id.container_buttons_type_room)
@@ -77,7 +80,11 @@ class RoomsFragment : Fragment() {
                     setOnClickListener {
                         when (buttonInfo.typeRoom) {
                             buttonInfo.typeRoom -> {
-                                roomViewModel.getAvailableRoomsByType(buttonInfo.typeRoom)
+                                roomViewModel.getAvailableRoomsByType(
+                                    buttonInfo.typeRoom,
+                                    userViewModel,
+                                    this@RoomsFragment
+                                )
                                 buttonInfo.isActive = !buttonInfo.isActive
                             }
 

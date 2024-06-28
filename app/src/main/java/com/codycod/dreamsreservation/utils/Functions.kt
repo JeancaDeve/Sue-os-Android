@@ -8,10 +8,12 @@ import com.codycod.dreamsreservation.data.enums.EnRoomStatus
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.enums.EnUserRoles
 import com.codycod.dreamsreservation.data.models.MdResponseApiReniec
+import com.codycod.dreamsreservation.data.models.MdReview
 import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
+import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
 import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -92,28 +94,11 @@ class Functions {
 
         //to parse data of json in object MdRoom
 
-        fun parseRoomJson(dataJson: MutableMap<String, Any>): MdRoom {
-
-            /*
-                  val userReview = MdUser(
-                      dni = "12345678",
-                      name = "Kevin",
-                      role = EnUserRoles.COMMON_USER,
-                      phone = "987654321",
-                      lastname = "Fernandez"
-                  )
-
-                  val reviewsJson = dataJson["reviews"] as? ArrayList<Map<String, Any>> ?: emptyList()
-
-                  val reviews  = reviewsJson.map { reviewJson ->
-                      MdReview(
-                          user = userReview,
-                          comment = reviewJson["comment"] as String,
-                          datetime = reviewJson["datetime"] as String
-                      )
-                  }
-            */
-
+        fun parseRoomJson(
+            dataJson: MutableMap<String, Any>,
+            viewModel: UserViewModel,
+            context: LifecycleOwner
+        ): MdRoom {
 
             val roomModel = MdRoom(
                 image = dataJson["image"] as? List<String> ?: emptyList(),
@@ -124,11 +109,52 @@ class Functions {
                 description = dataJson["description"] as? String ?: "",
                 floor = (dataJson["floor"] as? Number)?.toShort() ?: 0,
                 status = EnRoomStatus.valueOf(dataJson["status"] as String),
-                reviews = ArrayList()
+                reviews = getReviewsRooms(dataJson, viewModel, context)
             )
 
             return roomModel
         }
+
+        private fun getReviewsRooms(
+            dataJson: MutableMap<String, Any>,
+            viewModel: UserViewModel,
+            context: LifecycleOwner
+        ): ArrayList<MdReview> {
+
+            val reviews = ArrayList<MdReview>()
+
+            val reviewsData = dataJson["reviews"] as? List<Map<String, Any>> ?: emptyList()
+
+            var userReview: MdUser? = null
+
+            for (review in reviewsData) {
+
+                viewModel.getUserByDni(review["userDni"] as String)
+
+                viewModel.userDni.observe(context, Observer {
+                    userReview = it
+                })
+
+                reviews.add(
+                    MdReview(
+                        comment = review["comment"] as String,
+                        datetime = review["datetime"] as String,
+                        user = userReview ?: MdUser(
+                            "Anónimo",
+                            "",
+                            "00000000",
+                            "987654321",
+                            EnUserRoles.COMMON_USER
+                        )
+                    )
+                )
+
+
+            }
+            return reviews
+
+        }
+
 
         fun parseUserJson(dataJson: MutableMap<String, Any>): MdUser {
             return MdUser(

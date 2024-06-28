@@ -1,6 +1,7 @@
 package com.codycod.dreamsreservation.data.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
@@ -16,7 +17,11 @@ class RoomsViewModel : ViewModel() {
     private val listDocuments = ArrayList<MdRoom>()
 
     // To get all available rooms by type
-    fun getAvailableRoomsByType(typeRoom: EnTypeRoom? = null) {
+    fun getAvailableRoomsByType(
+        typeRoom: EnTypeRoom? = null,
+        userViewModel: UserViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
 
         val collection = firestore.collection("rooms")
 
@@ -36,7 +41,8 @@ class RoomsViewModel : ViewModel() {
                         val roomExist = room.data
                         try {
 
-                            val roomModel = Functions.parseRoomJson(roomExist)
+                            val roomModel =
+                                Functions.parseRoomJson(roomExist, userViewModel, lifecycleOwner)
 
                             listDocuments.add(roomModel)
                         } catch (e: Exception) {
@@ -53,7 +59,11 @@ class RoomsViewModel : ViewModel() {
 
     //correction to list by content not explicit
 
-    fun getRoomByContent(content: String? = null) {
+    fun getRoomByContent(
+        content: String? = null,
+        userViewModel: UserViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
         val collection = firestore.collection("rooms")
 
         val query = if (content != null) collection.whereArrayContains(
@@ -72,7 +82,8 @@ class RoomsViewModel : ViewModel() {
                     if (document.exists()) {
                         val roomReceived = document.data
 
-                        val documentRoom = Functions.parseRoomJson(roomReceived)
+                        val documentRoom =
+                            Functions.parseRoomJson(roomReceived, userViewModel, lifecycleOwner)
 
                         listDocuments.add(documentRoom)
                     }

@@ -14,18 +14,20 @@ import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.ui.adapters.RoomsFilterAdapter
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.viewmodels.RoomsViewModel
+import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
 
 class RoomsFilterActivity : AppCompatActivity() {
 
     private lateinit var listRoomsFilter: List<MdRoom>
     private lateinit var viewModel: RoomsViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms_filter)
         //init of view model
         viewModel = ViewModelProvider(this)[RoomsViewModel::class.java]
-
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv_rooms_filter)
         val inputFilter = findViewById<EditText>(R.id.input_filter)
@@ -37,7 +39,7 @@ class RoomsFilterActivity : AppCompatActivity() {
 
         //get data of firebase
 
-        viewModel.getRoomByContent()
+        viewModel.getRoomByContent(userViewModel = userViewModel, lifecycleOwner = this)
 
 
         val adapter = RoomsFilterAdapter()
@@ -54,7 +56,7 @@ class RoomsFilterActivity : AppCompatActivity() {
 
         inputFilter.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.getRoomByContent(inputFilter.text.toString())
+                viewModel.getRoomByContent(inputFilter.text.toString(), userViewModel, this)
 
                 return@setOnEditorActionListener true
             }

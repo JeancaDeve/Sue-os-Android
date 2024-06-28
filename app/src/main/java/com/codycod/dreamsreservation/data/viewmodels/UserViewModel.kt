@@ -11,6 +11,7 @@ class UserViewModel : ViewModel() {
 
     private val firestore = FirebaseFirestore.getInstance()
     private val collection = firestore.collection("usuarios")
+    val userDni = MutableLiveData<MdUser?>()
 
     //this is user get in the query
     val user = MutableLiveData<MdUser?>()
@@ -33,6 +34,22 @@ class UserViewModel : ViewModel() {
             .addOnFailureListener {
                 Log.d("error", "The error is $it")
                 user.value = null
+            }
+    }
+
+    //to get user by number of dni
+
+    fun getUserByDni(dni: String) {
+        collection.whereEqualTo("dni", dni)
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty || it != null) {
+                    val userData = it.documents[0].data
+
+                    val user = userData?.let { Functions.parseUserJson(userData) }
+
+                    userDni.value = user
+                }
             }
     }
 
