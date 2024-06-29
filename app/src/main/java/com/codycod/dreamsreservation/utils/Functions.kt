@@ -7,12 +7,17 @@ import androidx.lifecycle.Observer
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.enums.EnUserRoles
+import com.codycod.dreamsreservation.data.models.MdBill
+import com.codycod.dreamsreservation.data.models.MdGuest
+import com.codycod.dreamsreservation.data.models.MdReservation
 import com.codycod.dreamsreservation.data.models.MdResponseApiReniec
 import com.codycod.dreamsreservation.data.models.MdReview
 import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdUser
+import com.codycod.dreamsreservation.data.viewmodels.BillViewModel
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
+import com.codycod.dreamsreservation.data.viewmodels.GuestViewModel
 import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
 import java.time.Duration
 import java.time.LocalDate
@@ -153,6 +158,43 @@ class Functions {
             }
             return reviews
 
+        }
+
+
+        //to convert a json in a reservation model
+
+        fun parseReservationJson(
+            dataJson: MutableMap<String, Any>
+        ): MdReservation {
+
+            val mdBill = MdBill("00-00-0000", "98765432112", 0f)
+
+            val guest = MdGuest("", "", "", "", 1)
+
+            val room = ContentExample.roomsList[0]
+
+            return MdReservation(
+                dateReservation = dataJson["dateReservation"] as String,
+                entryDate = dataJson["entryDate"] as String,
+                departureDate = dataJson["departureDate"] as String,
+                mdBill = mdBill,
+                guest = guest,
+                room = room
+            )
+        }
+
+
+        //to convert a json in a guest model
+
+        fun parseGuestJson(dataJson: MutableMap<String, Any>): MdGuest {
+            return MdGuest(
+                name = dataJson["name"] as String,
+                lastname = dataJson["lastname"] as String,
+                dni = dataJson["dni"] as String,
+                phone = dataJson["phone"] as String,
+                cantReservation = (dataJson["cantReservation"] as Int).toShort(),
+
+                )
         }
 
 

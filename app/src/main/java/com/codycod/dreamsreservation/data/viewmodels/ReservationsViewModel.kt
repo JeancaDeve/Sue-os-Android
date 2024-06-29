@@ -4,12 +4,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdReservation
+import com.codycod.dreamsreservation.utils.Functions
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ReservationsViewModel: ViewModel() {
+class ReservationsViewModel : ViewModel() {
 
     private val firestore = FirebaseFirestore.getInstance()
     val reservationStatus = MutableLiveData<Boolean>()
+    val reservationsUser = MutableLiveData<ArrayList<MdReservation>>()
     private val collection = firestore.collection("reservations")
 
     fun createReservation(
@@ -35,6 +37,26 @@ class ReservationsViewModel: ViewModel() {
             reservationStatus.value = it.isSuccessful
         }
 
+    }
+
+
+    fun getReservationsByDniUser(dniUser: String) {
+
+        val reservationsList = ArrayList<MdReservation>()
+
+        collection.whereEqualTo("dniGuest", dniUser)
+            .get()
+            .addOnSuccessListener { reservations ->
+                if (!reservations.isEmpty) {
+                    for (reservation in reservations) {
+                        val model = Functions.parseReservationJson(reservation.data)
+
+                        reservationsList.add(model)
+                    }
+                }
+                reservationsUser.value = reservationsList
+
+            }
     }
 
 

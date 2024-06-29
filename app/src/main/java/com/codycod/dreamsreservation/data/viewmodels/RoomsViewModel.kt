@@ -15,6 +15,7 @@ class RoomsViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     val listRooms = MutableLiveData<List<MdRoom>>()
     private val listDocuments = ArrayList<MdRoom>()
+    private val roomByNumber = MutableLiveData<MdRoom>()
 
     // To get all available rooms by type
     fun getAvailableRoomsByType(
@@ -92,6 +93,30 @@ class RoomsViewModel : ViewModel() {
                 listRooms.value = listDocuments
 
 
+            }
+
+    }
+
+    //to get a room by number
+
+    fun getRoomByNumber(
+        number: Short,
+        userViewModel: UserViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
+        val collection = firestore.collection("rooms")
+
+        collection
+            .whereEqualTo("number", number.toInt())
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val room = documents.documents[0].data
+
+                    roomByNumber.value =
+                        room.let { Functions.parseRoomJson(room!!, userViewModel, lifecycleOwner) }
+
+                }
             }
 
     }

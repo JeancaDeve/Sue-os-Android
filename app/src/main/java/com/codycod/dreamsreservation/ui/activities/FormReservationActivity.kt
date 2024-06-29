@@ -18,6 +18,7 @@ import com.codycod.dreamsreservation.data.viewmodels.GuestViewModel
 import com.codycod.dreamsreservation.data.viewmodels.ReservationsViewModel
 import com.codycod.dreamsreservation.data.viewmodels.RoomsViewModel
 import com.codycod.dreamsreservation.utils.Functions
+import java.time.LocalDate
 
 class FormReservationActivity : AppCompatActivity() {
 
@@ -113,10 +114,10 @@ class FormReservationActivity : AppCompatActivity() {
                 )
 
                 val reservation = MdReservation(
-                    dateReservation = "fecha actual",
-                    entryDate = entryDateValue.toString(),
+                    dateReservation = LocalDate.now().toString(),
+                    entryDate = entryDateValue.toString().replace('/','-'),
                     room = roomReservation,
-                    departureDate = departureDateValue.toString(),
+                    departureDate = departureDateValue.toString().replace('/','-'),
                     mdBill = bill,
                     guest = guest
                 )

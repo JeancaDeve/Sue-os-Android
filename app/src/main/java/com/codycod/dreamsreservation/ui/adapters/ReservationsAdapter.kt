@@ -6,8 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.ui.viewholders.ReservasViewHolder
 import com.codycod.dreamsreservation.data.models.MdReservation
 
-class ReservationsAdapter(private val list: List<MdReservation>) :
+class ReservationsAdapter :
     RecyclerView.Adapter<ReservasViewHolder>() {
+
+    private var list = emptyList<MdReservation>()
+
+    fun setReservations(reservations: List<MdReservation>) {
+        this.list = reservations
+        notifyDataSetChanged()
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservasViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ReservasViewHolder(inflater, parent)
