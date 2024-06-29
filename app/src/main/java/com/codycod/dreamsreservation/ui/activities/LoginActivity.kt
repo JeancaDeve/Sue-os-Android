@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
         //get user
         userViewModel.getUserByDniAndPhone(dni, phone)
-
+        fireBaseViewModel.userNotExist(dni, phone)
         userViewModel.user.observe(this, Observer { user ->
             userLogin = user
             //when the user with set information not exist

@@ -43,7 +43,7 @@ class RegisterUserViewModel : ViewModel() {
     }
 
     //to add a user with dni and phone number uniques
-    private fun userNotExist(dni: String, phone: String) {
+    fun userNotExist(dni: String, phone: String) {
         val collection = firestoreInstance.collection("usuarios")
         collection
             .whereEqualTo("dni", dni)
