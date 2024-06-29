@@ -58,7 +58,7 @@ class ContentExample {
             MdUser("Faraon", "Love Shady", "87654322", "987654322", EnUserRoles.ADMIN)
 
 
-        private val guestExample = MdGuest("Kevin", "Fernandez", "87654321", "987654321")
+        private val guestExample = MdGuest("Kevin", "Fernandez", "87654321", "987654321" , 1)
 
 
         val reservationsList = listOf(

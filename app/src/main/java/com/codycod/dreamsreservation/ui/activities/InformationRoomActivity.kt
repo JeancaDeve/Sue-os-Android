@@ -96,7 +96,9 @@ class InformationRoomActivity : AppCompatActivity() {
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.item_pm_reserve -> {
-                    startActivity(Intent(this, FormReservationActivity::class.java))
+                    val intent = Intent(this, FormReservationActivity::class.java)
+                    intent.putExtra("room_reservation", getObjectRoom)
+                    startActivity(intent)
                     true
                 }
 

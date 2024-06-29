@@ -7,6 +7,4 @@ data class MdReservation(
     val departureDate: String,
     val mdBill: MdBill,
     val guest: MdGuest //delete later
-) {
-    val code: Long = 0
-}
+)

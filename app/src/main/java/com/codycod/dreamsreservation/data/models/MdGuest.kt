@@ -5,4 +5,5 @@ data class MdGuest(
     val lastname: String,
     val dni: String,
     val phone: String,
+    val cantReservation : Short
 )
