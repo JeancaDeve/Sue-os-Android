@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdUser
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserViewModel : ViewModel() {
@@ -25,7 +25,7 @@ class UserViewModel : ViewModel() {
             .addOnSuccessListener { users ->
                 if (users != null && !users.isEmpty) {
                     val userDocument = users.documents[0].data
-                    user.value = userDocument?.let { Functions.parseUserJson(it) }
+                    user.value = userDocument?.let { FunctionsData.parseUserJson(it) }
                 } else {
                     Log.e("Not Found", "Not exist users with dni $dni and phone $phone")
                     user.value = null
@@ -43,12 +43,16 @@ class UserViewModel : ViewModel() {
         collection.whereEqualTo("dni", dni)
             .get()
             .addOnSuccessListener {
-                if (!it.isEmpty || it != null) {
-                    val userData = it.documents[0].data
-
-                    val user = userData?.let { Functions.parseUserJson(userData) }
+                querySnapshot ->
+                if (querySnapshot!=null && !querySnapshot.isEmpty) {
+                    val userDocument = querySnapshot.documents[0]
+                    val userData = userDocument.data
+                    val user = userData?.let { FunctionsData.parseUserJson(userData) }
 
                     userDni.value = user
+                }else{
+                    Log.e("Not Found", "Not exist users with dni $dni")
+                    userDni.value = null
                 }
             }
     }

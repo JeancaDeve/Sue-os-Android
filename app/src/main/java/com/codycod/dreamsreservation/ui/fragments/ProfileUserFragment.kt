@@ -1,6 +1,5 @@
 package com.codycod.dreamsreservation.ui.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,14 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.data.enums.EnUserRoles
-import com.codycod.dreamsreservation.data.models.MdUser
-import com.codycod.dreamsreservation.ui.activities.LoginActivity
 import com.codycod.dreamsreservation.ui.activities.MyReservationsActivity
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 
 
 class ProfileUserFragment : Fragment() {
@@ -39,7 +34,7 @@ class ProfileUserFragment : Fragment() {
 
         //this is a user get information in login
 
-        val userinfo = Functions.getUserInfo(view.context)
+        val userinfo = FunctionsData.getUserInfo(view.context)
 
         //to load info user in items
         nameText.text = "${userinfo.name} ${userinfo.lastname}"

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.enums.EnRoomStatus
 import com.codycod.dreamsreservation.data.enums.EnTypeRoom
 import com.codycod.dreamsreservation.data.models.MdRoom
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RoomsViewModel : ViewModel() {
@@ -43,7 +43,7 @@ class RoomsViewModel : ViewModel() {
                         try {
 
                             val roomModel =
-                                Functions.parseRoomJson(roomExist, userViewModel, lifecycleOwner)
+                                FunctionsData.parseRoomJson(roomExist, userViewModel, lifecycleOwner)
 
                             listDocuments.add(roomModel)
                         } catch (e: Exception) {
@@ -84,7 +84,7 @@ class RoomsViewModel : ViewModel() {
                         val roomReceived = document.data
 
                         val documentRoom =
-                            Functions.parseRoomJson(roomReceived, userViewModel, lifecycleOwner)
+                            FunctionsData.parseRoomJson(roomReceived, userViewModel, lifecycleOwner)
 
                         listDocuments.add(documentRoom)
                     }
@@ -114,7 +114,7 @@ class RoomsViewModel : ViewModel() {
                     val room = documents.documents[0].data
 
                     roomByNumber.value =
-                        room.let { Functions.parseRoomJson(room!!, userViewModel, lifecycleOwner) }
+                        room.let { FunctionsData.parseRoomJson(room!!, userViewModel, lifecycleOwner) }
 
                 }
             }

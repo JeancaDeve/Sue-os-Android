@@ -3,7 +3,7 @@ package com.codycod.dreamsreservation.data.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdGuest
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.google.firebase.firestore.FirebaseFirestore
 
 class GuestViewModel : ViewModel() {
@@ -35,7 +35,7 @@ class GuestViewModel : ViewModel() {
                 if (!documents.isEmpty) {
                     val guestDocument = documents.documents[0].data
 
-                    val guest = guestDocument?.let { Functions.parseGuestJson(it) }
+                    val guest = guestDocument?.let { FunctionsData.parseGuestJson(it) }
 
                     guestDni.value = guest
 

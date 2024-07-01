@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdRoomSave
 import com.codycod.dreamsreservation.data.viewmodels.RoomSaveViewModel
@@ -120,7 +120,7 @@ class InformationRoomActivity : AppCompatActivity() {
             number = roomEntity.number,
             image = roomEntity.image[0],
             price = roomEntity.price,
-            content = Functions.arrayToString(roomEntity.content),
+            content = FunctionsData.arrayToString(roomEntity.content),
             typeRoom = roomEntity.typeRoom
         )
         try {

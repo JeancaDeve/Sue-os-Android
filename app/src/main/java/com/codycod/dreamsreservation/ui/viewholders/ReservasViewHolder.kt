@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.codycod.dreamsreservation.data.models.MdReservation
 
 
@@ -29,7 +29,7 @@ class ReservasViewHolder
     fun bind(mdReservation: MdReservation) {
 
         val daysHosted =
-            Functions.getDayHosted(mdReservation.entryDate, mdReservation.departureDate)
+            FunctionsData.getDayHosted(mdReservation.entryDate, mdReservation.departureDate)
 
         FechaReserva?.text = mdReservation.dateReservation
         NHabitacion?.text = mdReservation.room.number.toString()

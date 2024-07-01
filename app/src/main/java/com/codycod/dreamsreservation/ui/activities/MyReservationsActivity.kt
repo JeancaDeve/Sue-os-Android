@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codycod.dreamsreservation.R
 import com.codycod.dreamsreservation.data.viewmodels.ReservationsViewModel
 import com.codycod.dreamsreservation.ui.adapters.ReservationsAdapter
-import com.codycod.dreamsreservation.utils.Functions
-import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
+import com.codycod.dreamsreservation.utils.FunctionsData
 
 class MyReservationsActivity : AppCompatActivity() {
 
@@ -29,7 +28,7 @@ class MyReservationsActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         //this is a user Logged in app
-        val userLogged = Functions.getUserInfo(this)
+        val userLogged = FunctionsData.getUserInfo(this)
 
         //loading data reservation
         reservationsViewModel.getReservationsByDniUser(userLogged.dni)

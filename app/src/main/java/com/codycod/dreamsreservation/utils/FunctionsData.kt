@@ -15,16 +15,14 @@ import com.codycod.dreamsreservation.data.models.MdReview
 import com.codycod.dreamsreservation.utils.functions.contentexample.ContentExample
 import com.codycod.dreamsreservation.data.models.MdRoom
 import com.codycod.dreamsreservation.data.models.MdUser
-import com.codycod.dreamsreservation.data.viewmodels.BillViewModel
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
-import com.codycod.dreamsreservation.data.viewmodels.GuestViewModel
 import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
-import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.time.temporal.ChronoUnit
 
-class Functions {
+class FunctionsData {
     companion object {
         fun getDayHosted(entryDate: String, departureDate: String): Long {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -36,16 +34,6 @@ class Functions {
         //to divider text in a list by delimiter
         fun divideText(text: String, delimiter: String = " - "): List<String> {
             return text.split(delimiter)
-        }
-
-
-        //to list by type room
-
-        fun listRoomsByType(type: EnTypeRoom? = null): List<MdRoom> {
-            return if (type == null) ContentExample.roomsList
-            else ContentExample.roomsList.filter { room ->
-                room.typeRoom == type
-            }
         }
 
         //to get information to user using api reniec
@@ -77,25 +65,18 @@ class Functions {
                 }
 
             }
-
             viewModel.dniData.observe(lifecycleOwner, observer)
-
         }
 
-
         //convert a array to string
-
         fun arrayToString(list: List<String>): String {
             var text: String = ""
 
             for (s in list) {
                 text += "$s - "
             }
-
             return text
-
         }
-
 
         //to parse data of json in object MdRoom
 
@@ -257,6 +238,29 @@ class Functions {
                 role = EnUserRoles.COMMON_USER
             )
 
+        }
+
+        //to verify if a date is valida
+
+        fun verifyDate(entry: String, departure: String): String? {
+            val dateNow = LocalDate.now()
+
+            if (entry.isEmpty() || departure.isEmpty()) {
+                return Messages.DATES_EMPTY
+            }
+
+            return try {
+                val entryLocal = LocalDate.parse(entry)
+                val departureLocal = LocalDate.parse(departure)
+
+                when {
+                    entryLocal.isBefore(dateNow) -> Messages.ENTRY_INVALID
+                    entryLocal.isAfter(departureLocal) -> Messages.DATES_INVALID
+                    else -> null
+                }
+            } catch (e: DateTimeParseException) {
+                "Una o ambas fechas no son válidas."
+            }
         }
 
 

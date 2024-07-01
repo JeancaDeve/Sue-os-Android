@@ -1,10 +1,9 @@
 package com.codycod.dreamsreservation.data.viewmodels
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codycod.dreamsreservation.data.models.MdReservation
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ReservationsViewModel : ViewModel() {
@@ -49,7 +48,7 @@ class ReservationsViewModel : ViewModel() {
             .addOnSuccessListener { reservations ->
                 if (!reservations.isEmpty) {
                     for (reservation in reservations) {
-                        val model = Functions.parseReservationJson(reservation.data)
+                        val model = FunctionsData.parseReservationJson(reservation.data)
 
                         reservationsList.add(model)
                     }

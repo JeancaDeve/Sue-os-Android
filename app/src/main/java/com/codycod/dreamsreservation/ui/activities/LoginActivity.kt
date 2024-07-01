@@ -1,6 +1,5 @@
 package com.codycod.dreamsreservation.ui.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,7 +16,7 @@ import com.codycod.dreamsreservation.data.models.MdUser
 import com.codycod.dreamsreservation.data.viewmodels.DniViewModel
 import com.codycod.dreamsreservation.data.viewmodels.RegisterUserViewModel
 import com.codycod.dreamsreservation.data.viewmodels.UserViewModel
-import com.codycod.dreamsreservation.utils.Functions
+import com.codycod.dreamsreservation.utils.FunctionsData
 import com.codycod.dreamsreservation.utils.Messages
 
 
@@ -63,13 +62,13 @@ class LoginActivity : AppCompatActivity() {
             val dni = edtDni.text.toString()
 
             when {
-                phone.isEmpty() -> Functions.customToast(Messages.PHONE_REQUIRED, this)
+                phone.isEmpty() -> FunctionsData.customToast(Messages.PHONE_REQUIRED, this)
 
-                dni.isEmpty() -> Functions.customToast(Messages.DNI_REQUIRED, this)
+                dni.isEmpty() -> FunctionsData.customToast(Messages.DNI_REQUIRED, this)
 
-                Functions.invalidPhone(phone) -> Functions.customToast(Messages.INVALID_PHONE, this)
+                FunctionsData.invalidPhone(phone) -> FunctionsData.customToast(Messages.INVALID_PHONE, this)
 
-                Functions.invalidDni(dni) -> Functions.customToast(Messages.INVALID_DNI, this)
+                FunctionsData.invalidDni(dni) -> FunctionsData.customToast(Messages.INVALID_DNI, this)
 
                 else -> authorization(phone, dni)
             }
@@ -101,14 +100,14 @@ class LoginActivity : AppCompatActivity() {
                         fireBaseViewModel.userRegister.observe(this, Observer { userRegister ->
                             if (userRegister != null) {
 
-                                Functions.customToast(
+                                FunctionsData.customToast(
                                     Messages.welcome(userRegister.name),
                                     this,
                                     Toast.LENGTH_LONG
                                 )
 
                                 //save info of user logged in shared preferences
-                                Functions.saveInfoUser(userRegister, this)
+                                FunctionsData.saveInfoUser(userRegister, this)
                                 startActivity(intent)
                             }
                         })
@@ -117,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
 
             } else {
                 //save info of user logged in shared preferences
-                Functions.saveInfoUser(userLogin!!, this)
+                FunctionsData.saveInfoUser(userLogin!!, this)
                 startActivity(intent)
             }
         })
@@ -130,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
 
         fireBaseViewModel.userNoExist.observe(this, Observer { notExist ->
             if (notExist) {
-                Functions.withInformationUserWithDni(
+                FunctionsData.withInformationUserWithDni(
                     dni,
                     phone,
                     dniViewModel,
@@ -139,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
                     user?.let { fireBaseViewModel.registerUser(it) }
                 }
             } else {
-                Functions.customToast(Messages.USER_EXIST, this)
+                FunctionsData.customToast(Messages.USER_EXIST, this)
             }
         })
 
